@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEO Inspector · MedReachIQ</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:   #0B1F3A;
+    --ink2:  #132D52;
+    --teal1: #0D8A8A;
+    --teal2: #16B3B3;
+    --teal3: #1DCFCF;
+    --gold:  #F0A500;
+    --bg:    #F4F7FA;
+    --card:  #FFFFFF;
+    --line:  #E2E9F0;
+    --muted: #5B6B7F;
+    --pass:  #15926B;
+    --passbg:#E4F5EE;
+    --warn:  #B9760A;
+    --warnbg:#FBF1DE;
+    --fail:  #C2354A;
+    --failbg:#FBE7EA;
+    --info:  #5B6B7F;
+    --infobg:#EEF2F6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .display { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ---------- Header ---------- */
+  header.topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: #fff;
+  }
+  .topbar-inner {
+    max-width: 1180px; margin: 0 auto; padding: 14px 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--teal1), var(--teal2));
+    display: grid; place-items: center;
+    font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 18px; color: #fff;
+  }
+  .topbar h1 { font-size: 16px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .topbar .sub { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 1px; }
+  .topbar .spacer { flex: 1; }
+  .scan-meta { font-size: 12px; color: rgba(255,255,255,0.5); text-align: right; line-height: 1.4; }
+  button.btn {
+    font-family: inherit; font-weight: 700; font-size: 13px;
+    border: none; cursor: pointer; border-radius: 8px;
+    padding: 9px 16px; display: inline-flex; align-items: center; gap: 7px;
+    transition: filter .15s ease, transform .15s ease, background .15s ease;
+  }
+  button.btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--teal3); color: var(--ink); }
+  .btn-primary:hover { filter: brightness(1.06); }
+  .btn-primary:disabled { opacity: .5; cursor: default; }
+  .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.16); }
+
+  /* ---------- Layout ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 28px; }
+
+  /* ---------- Summary ---------- */
+  .summary {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 8px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .stat .num { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.02em; }
+  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 7px; font-weight: 500; }
+  .stat.alert .num { color: var(--fail); }
+  .stat.warnstat .num { color: var(--warn); }
+  .stat.good .num { color: var(--pass); }
+
+  .controls {
+    display: flex; align-items: center; gap: 16px; margin: 22px 0 14px;
+  }
+  .controls .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .controls .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .dot.pass { background: var(--pass); }
+  .dot.warn { background: var(--warn); }
+  .dot.fail { background: var(--fail); }
+  .dot.info { background: var(--info); }
+  .controls .right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .toggle {
+    font-size: 13px; color: var(--ink); cursor: pointer; user-select: none;
+    display: inline-flex; align-items: center; gap: 7px; font-weight: 600;
+    background: var(--card); border: 1px solid var(--line); padding: 8px 13px; border-radius: 8px;
+  }
+  .toggle input { accent-color: var(--teal1); width: 15px; height: 15px; }
+
+  /* ---------- Page rows ---------- */
+  .rows { display: flex; flex-direction: column; gap: 10px; }
+  .row {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; transition: box-shadow .15s ease, border-color .15s ease;
+  }
+  .row:hover { box-shadow: 0 4px 18px -10px rgba(11,31,58,0.35); }
+  .row-head {
+    display: flex; align-items: center; gap: 16px; padding: 15px 18px; cursor: pointer;
+  }
+  .row-title { min-width: 0; flex: 0 0 270px; }
+  .row-title .nm { font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 14.5px; letter-spacing: -0.01em; }
+  .row-title .pth { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .pills { display: flex; gap: 7px; flex-wrap: wrap; flex: 1; }
+  .pill {
+    font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .pill.pass { background: var(--passbg); color: var(--pass); }
+  .pill.warn { background: var(--warnbg); color: var(--warn); }
+  .pill.fail { background: var(--failbg); color: var(--fail); }
+  .pill.info { background: var(--infobg); color: var(--info); }
+  .pill .pdot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .chev { color: var(--muted); transition: transform .18s ease; flex: 0 0 auto; }
+  .row.open .chev { transform: rotate(90deg); }
+  .issue-count {
+    flex: 0 0 auto; font-size: 12px; font-weight: 700; color: var(--muted);
+    min-width: 78px; text-align: right;
+  }
+  .issue-count.has { color: var(--fail); }
+  .issue-count.clean { color: var(--pass); }
+
+  /* ---------- Details ---------- */
+  .detail { display: none; border-top: 1px solid var(--line); padding: 4px 18px 20px; }
+  .row.open .detail { display: block; }
+  .field { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .field:last-child { border-bottom: none; }
+  .field-head { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+  .field-head .k { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); }
+  .field-head .len { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .val {
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.55;
+    background: #F8FAFC; border: 1px solid var(--line); border-radius: 8px;
+    padding: 9px 12px; color: var(--ink2); word-break: break-word; white-space: pre-wrap;
+  }
+  .val.empty { color: var(--fail); font-style: italic; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .note.warn { color: var(--warn); }
+  .note.fail { color: var(--fail); }
+
+  /* image table */
+  .imgtable { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .imgtable th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 6px 10px; border-bottom: 1px solid var(--line); font-weight: 700; }
+  .imgtable td { font-size: 12px; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .imgtable td.src { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink2); word-break: break-all; max-width: 280px; }
+  .imgtable td.alt { word-break: break-word; }
+  .imgtable td.alt.missing { color: var(--fail); font-style: italic; }
+  .imgtable td.alt.deco { color: var(--warn); font-style: italic; }
+  .tag-mini { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; }
+  .tag-mini.pass { background: var(--passbg); color: var(--pass); }
+  .tag-mini.warn { background: var(--warnbg); color: var(--warn); }
+  .tag-mini.fail { background: var(--failbg); color: var(--fail); }
+
+  .og-grid { display: grid; grid-template-columns: 130px 1fr; gap: 4px 14px; font-size: 12.5px; }
+  .og-grid .ogk { font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+  .og-grid .ogv { font-family: 'JetBrains Mono', monospace; color: var(--ink2); word-break: break-word; }
+  .og-grid .ogv.missing { color: var(--fail); font-style: italic; }
+  .og-img { margin-top: 12px; }
+  .og-img img { max-height: 120px; border-radius: 8px; border: 1px solid var(--line); }
+
+  /* progress / states */
+  .scanning {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 40px; text-align: center; color: var(--muted);
+  }
+  .progbar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 18px auto 0; max-width: 420px; }
+  .progbar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--teal1), var(--teal3)); width: 0%; transition: width .3s ease; }
+  .spinner { width: 26px; height: 26px; border: 3px solid var(--line); border-top-color: var(--teal2); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 14px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .row.errored .row-title .nm { color: var(--fail); }
+  .hidden { display: none !important; }
+  #sandbox { position: fixed; width: 1280px; height: 900px; left: -9999px; top: 0; border: 0; }
+  .footnote { text-align: center; color: var(--muted); font-size: 12px; margin: 30px 0 10px; }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="mark">M</div>
+      <div>
+        <h1 class="display">SEO Inspector</h1>
+        <div class="sub">MedReachIQ · on-page audit</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="scan-meta" id="scanMeta">Reads the rendered DOM of every page</div>
+      <button class="btn btn-primary" id="rescan">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        Re-scan
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="summary" id="summary"></div>
+
+    <div class="controls">
+      <div class="legend">
+        <span><i class="dot pass"></i> Pass</span>
+        <span><i class="dot warn"></i> Needs attention</span>
+        <span><i class="dot fail"></i> Missing / broken</span>
+        <span><i class="dot info"></i> Review</span>
+      </div>
+      <div class="right">
+        <label class="toggle"><input type="checkbox" id="onlyIssues" /> Show only pages with issues</label>
+      </div>
+    </div>
+
+    <div id="status"></div>
+    <div class="rows" id="rows"></div>
+    <div class="footnote">Scans the live rendered DOM (post-JavaScript), so this reflects what a crawler sees after your React app loads. Read-only — tell Claude what to change and it edits the files.</div>
+  </main>
+
+  <iframe id="sandbox" title="scan sandbox"></iframe>
+
+<script>
+/* ----------------------------------------------------------------------
+   Pages to scan. Edit this list if you add/remove pages.
+---------------------------------------------------------------------- */
+const PAGES = [
+  { path: 'index.html',                            label: 'Home' },
+  { path: 'solution-audience-intelligence.html',   label: 'CME Audience Intelligence' },
+  { path: 'solution-cme-targeting.html',           label: 'HCP Outreach' },
+  { path: 'solution-multichannel-marketing.html',  label: 'Alumni Growth Engine' },
+  { path: 'solution-nursing.html',                 label: 'Nurse Audience Intelligence' },
+  { path: 'use-cases.html',                        label: 'Use Cases' },
+  { path: 'personas.html',                         label: 'Personas & Intent' },
+  { path: 'how-it-works.html',                     label: 'How It Works' },
+  { path: 'blog.html',                             label: 'Blog' },
+  { path: 'blog-intent-data.html',                 label: 'Blog · Intent Data' },
+  { path: 'case-studies.html',                     label: 'Case Studies' },
+  { path: 'whitepapers.html',                      label: 'Whitepapers' },
+  { path: 'contact.html',                          label: 'Contact' },
+];
+
+const OG_KEYS = ['og:title','og:description','og:image','og:url','og:type'];
+
+const $ = (s, r=document) => r.querySelector(s);
+const el = (t, c, html) => { const e = document.createElement(t); if(c) e.className = c; if(html!=null) e.innerHTML = html; return e; };
+const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+let RESULTS = [];
+
+/* ---------- Load one page in the sandbox iframe & read its DOM ---------- */
+function scanPage(page) {
+  return new Promise(resolve => {
+    const frame = $('#sandbox');
+    let settled = false;
+    const finish = (data) => { if (settled) return; settled = true; resolve(data); };
+
+    const onLoad = () => {
+      let doc;
+      try { doc = frame.contentDocument; } catch (e) { return finish({ ...page, error: 'Cannot read document (cross-origin).' }); }
+      if (!doc) return finish({ ...page, error: 'No document loaded.' });
+
+      // Wait for React-rendered pages to populate #root, then read.
+      const root = doc.getElementById('root');
+      let tries = 0; const MAX = 28; // ~5.6s
+      const poll = setInterval(() => {
+        tries++;
+        const rendered = !root || root.childElementCount > 0;
+        if (rendered || tries >= MAX) {
+          clearInterval(poll);
+          setTimeout(() => finish(extract(page, doc)), 350);
+        }
+      }, 200);
+    };
+
+    frame.onload = onLoad;
+    frame.onerror = () => finish({ ...page, error: 'Failed to load.' });
+    // bust any cache so re-scan reflects edits
+    frame.src = page.path + '?seoscan=' + Date.now();
+    // hard timeout safety
+    setTimeout(() => finish({ ...page, error: settled ? null : 'Timed out.' }), 12000);
+  });
+}
+
+/* ---------- Pull SEO data out of a rendered document ---------- */
+function extract(page, doc) {
+  const head = doc.head;
+  const getMeta = (sel) => { const m = head.querySelector(sel); return m ? (m.getAttribute('content') || '').trim() : null; };
+
+  // Title
+  const title = (doc.title || '').trim();
+  let tStatus = 'pass', tMsg = '';
+  if (!title) { tStatus = 'fail'; tMsg = 'No title tag.'; }
+  else if (title.length > 60) { tStatus = 'warn'; tMsg = 'Over 60 chars — may truncate in results.'; }
+  else if (title.length < 30) { tStatus = 'warn'; tMsg = 'Under 30 chars — room for more keywords.'; }
+
+  // Meta description
+  const desc = getMeta('meta[name="description"]');
+  let dStatus = 'pass', dMsg = '';
+  if (desc == null) { dStatus = 'fail'; dMsg = 'No meta description — search engines will guess the snippet.'; }
+  else if (desc.length > 160) { dStatus = 'warn'; dMsg = 'Over 160 chars — likely truncated.'; }
+  else if (desc.length < 70) { dStatus = 'warn'; dMsg = 'Under 70 chars — could be more descriptive.'; }
+
+  // Canonical
+  const canonical = (() => { const l = head.querySelector('link[rel="canonical"]'); return l ? l.getAttribute('href') : null; })();
+
+  // Open Graph
+  const og = {};
+  OG_KEYS.forEach(k => { og[k] = getMeta('meta[property="' + k + '"]'); });
+  const ogMissing = OG_KEYS.filter(k => !og[k]);
+  let ogStatus = 'pass', ogMsg = '';
+  if (ogMissing.length === OG_KEYS.length) { ogStatus = 'fail'; ogMsg = 'No Open Graph tags — link previews will look bare.'; }
+  else if (ogMissing.length > 0) { ogStatus = 'warn'; ogMsg = 'Missing: ' + ogMissing.join(', '); }
+  const twitterCard = getMeta('meta[name="twitter:card"]');
+
+  // H1s
+  const h1s = [...doc.querySelectorAll('h1')].map(h => h.textContent.trim().replace(/\s+/g,' ')).filter(Boolean);
+  let hStatus = 'pass', hMsg = '';
+  if (h1s.length === 0) { hStatus = 'fail'; hMsg = 'No H1 found.'; }
+  else if (h1s.length > 1) { hStatus = 'warn'; hMsg = h1s.length + ' H1s — there should be exactly one.'; }
+
+  // Images
+  const imgs = [...doc.querySelectorAll('img')].map(img => {
+    const hasAttr = img.hasAttribute('alt');
+    const alt = img.getAttribute('alt') || '';
+    let st = 'pass';
+    if (!hasAttr) st = 'fail';        // no alt attribute at all
+    else if (alt.trim() === '') st = 'deco'; // intentional-but-review (decorative)
+    return { src: img.getAttribute('src') || '(inline/blob)', alt, hasAttr, st };
+  });
+  const imgMissing = imgs.filter(i => i.st === 'fail').length;
+  const imgDeco = imgs.filter(i => i.st === 'deco').length;
+  let iStatus = 'pass', iMsg = '';
+  if (imgMissing > 0) { iStatus = 'fail'; iMsg = imgMissing + ' image' + (imgMissing>1?'s':'') + ' missing an alt attribute.'; }
+  else if (imgDeco > 0) { iStatus = 'warn'; iMsg = imgDeco + ' image' + (imgDeco>1?'s':'') + ' with empty alt (decorative — confirm intentional).'; }
+
+  const fields = { title:{value:title,status:tStatus,msg:tMsg}, desc:{value:desc,status:dStatus,msg:dMsg},
+    og:{tags:og,status:ogStatus,msg:ogMsg,twitterCard}, canonical, h1:{list:h1s,status:hStatus,msg:hMsg},
+    images:{list:imgs,status:iStatus,msg:iMsg,total:imgs.length,missing:imgMissing,deco:imgDeco} };
+
+  const issues = [tStatus,dStatus,ogStatus,hStatus,iStatus].filter(s => s==='fail').length;
+  const warns  = [tStatus,dStatus,ogStatus,hStatus,iStatus].filter(s => s==='warn').length;
+  return { ...page, error:null, fields, issues, warns };
+}
+
+/* ---------- Rendering ---------- */
+function pill(label, status) {
+  const map = { pass:'pass', warn:'warn', fail:'fail', deco:'warn', info:'info' };
+  return `<span class="pill ${map[status]||'info'}"><i class="pdot"></i>${label}</span>`;
+}
+
+function renderSummary() {
+  const scanned = RESULTS.filter(r => !r.error).length;
+  const withIssues = RESULTS.filter(r => !r.error && (r.issues>0 || r.warns>0)).length;
+  const noDesc = RESULTS.filter(r => !r.error && r.fields.desc.status==='fail').length;
+  const noOg = RESULTS.filter(r => !r.error && r.fields.og.status==='fail').length;
+  const imgAlt = RESULTS.reduce((a,r)=> a + (r.error?0:r.fields.images.missing), 0);
+  const cards = [
+    { num: scanned, lbl: 'Pages scanned', cls: '' },
+    { num: withIssues, lbl: 'Pages with flags', cls: withIssues? 'warnstat':'good' },
+    { num: noDesc, lbl: 'Missing meta description', cls: noDesc? 'alert':'good' },
+    { num: noOg, lbl: 'Missing OG tags', cls: noOg? 'alert':'good' },
+    { num: imgAlt, lbl: 'Images missing alt', cls: imgAlt? 'alert':'good' },
+  ];
+  $('#summary').innerHTML = cards.map(c =>
+    `<div class="stat ${c.cls}"><div class="num">${c.num}</div><div class="lbl">${c.lbl}</div></div>`).join('');
+}
+
+function ogRow(k, v) {
+  return `<div class="ogk">${esc(k)}</div><div class="ogv ${v?'':'missing'}">${v?esc(v):'— missing —'}</div>`;
+}
+
+function renderRow(r) {
+  const row = el('div', 'row');
+  if (r.error) {
+    row.classList.add('errored');
+    row.innerHTML = `<div class="row-head"><div class="row-title"><div class="nm">${esc(r.label)}</div><div class="pth mono">${esc(r.path)}</div></div>
+      <div class="pills"><span class="pill fail"><i class="pdot"></i>${esc(r.error)}</span></div></div>`;
+    return row;
+  }
+  const f = r.fields;
+  const head = el('div', 'row-head');
+  head.innerHTML = `
+    <div class="row-title"><div class="nm">${esc(r.label)}</div><div class="pth mono">${esc(r.path)}</div></div>
+    <div class="pills">
+      ${pill('Title', f.title.status)}
+      ${pill('Meta desc', f.desc.status)}
+      ${pill('OG tags', f.og.status)}
+      ${pill('H1 (' + f.h1.list.length + ')', f.h1.status)}
+      ${pill('Alt (' + (f.images.total - f.images.missing) + '/' + f.images.total + ')', f.images.status)}
+    </div>
+    <div class="issue-count ${r.issues? 'has' : (r.warns? '' : 'clean')}">${r.issues? r.issues+' missing' : (r.warns? r.warns+' to review' : '✓ clean')}</div>
+    <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
+  head.addEventListener('click', () => row.classList.toggle('open'));
+  row.appendChild(head);
+
+  const d = el('div', 'detail');
+
+  // Title
+  d.appendChild(fieldBlock('Title tag', f.title.value, f.title.status, f.title.msg,
+    f.title.value ? f.title.value.length + ' chars' : null));
+  // Meta description
+  d.appendChild(fieldBlock('Meta description', f.desc.value, f.desc.status, f.desc.msg,
+    f.desc.value!=null ? f.desc.value.length + ' chars' : null));
+
+  // OG block
+  const ogF = el('div', 'field');
+  let ogHtml = `<div class="field-head"><span class="k">Open Graph / social</span><span class="len">${f.og.twitterCard? 'twitter:card ✓':'no twitter:card'}</span></div>`;
+  ogHtml += `<div class="og-grid">` + OG_KEYS.map(k => ogRow(k, f.og.tags[k])).join('') + `</div>`;
+  if (f.og.tags['og:image']) ogHtml += `<div class="og-img"><img src="${esc(f.og.tags['og:image'])}" alt="og preview" onerror="this.style.display='none'"/></div>`;
+  if (f.og.msg) ogHtml += `<div class="note ${f.og.status}">${esc(f.og.msg)}</div>`;
+  ogF.innerHTML = ogHtml;
+  d.appendChild(ogF);
+
+  // Canonical
+  d.appendChild(fieldBlock('Canonical URL', f.canonical, f.canonical? 'pass':'warn',
+    f.canonical? '' : 'No canonical tag — fine for now, but add one if you ever have duplicate URLs.', null));
+
+  // H1s
+  const h1F = el('div', 'field');
+  let h1Html = `<div class="field-head"><span class="k">H1 heading${f.h1.list.length!==1?'s':''}</span><span class="len">${f.h1.list.length} found</span></div>`;
+  if (f.h1.list.length) h1Html += f.h1.list.map(h => `<div class="val">${esc(h)}</div>`).join('<div style="height:6px"></div>');
+  else h1Html += `<div class="val empty">— none —</div>`;
+  if (f.h1.msg) h1Html += `<div class="note ${f.h1.status}">${esc(f.h1.msg)}</div>`;
+  h1F.innerHTML = h1Html;
+  d.appendChild(h1F);
+
+  // Images
+  const imgF = el('div', 'field');
+  let imgHtml = `<div class="field-head"><span class="k">Images &amp; alt text</span><span class="len">${f.images.total} image${f.images.total!==1?'s':''}</span></div>`;
+  if (f.images.total) {
+    imgHtml += `<table class="imgtable"><thead><tr><th style="width:42%">Source</th><th>Alt text</th><th style="width:90px">Status</th></tr></thead><tbody>`;
+    imgHtml += f.images.list.map(im => {
+      const altCls = im.st==='fail' ? 'missing' : (im.st==='deco' ? 'deco' : '');
+      const altTxt = im.st==='fail' ? '— no alt attribute —' : (im.st==='deco' ? '(empty — decorative)' : im.alt);
+      const tag = im.st==='fail' ? '<span class="tag-mini fail">Missing</span>' : (im.st==='deco' ? '<span class="tag-mini warn">Decorative</span>' : '<span class="tag-mini pass">OK</span>');
+      return `<tr><td class="src">${esc(im.src)}</td><td class="alt ${altCls}">${esc(altTxt)}</td><td>${tag}</td></tr>`;
+    }).join('');
+    imgHtml += `</tbody></table>`;
+  } else {
+    imgHtml += `<div class="val empty">No &lt;img&gt; tags on this page.</div>`;
+  }
+  if (f.images.msg) imgHtml += `<div class="note ${f.images.status==='fail'?'fail':'warn'}">${esc(f.images.msg)}</div>`;
+  imgF.innerHTML = imgHtml;
+  d.appendChild(imgF);
+
+  row.appendChild(d);
+  return row;
+}
+
+function fieldBlock(label, value, status, msg, lenLabel) {
+  const f = el('div', 'field');
+  const isEmpty = value == null || value === '';
+  f.innerHTML = `<div class="field-head"><span class="k">${esc(label)}</span>${lenLabel?`<span class="len">${esc(lenLabel)}</span>`:''}</div>
+    <div class="val ${isEmpty?'empty':''}">${isEmpty? '— not set —' : esc(value)}</div>
+    ${msg? `<div class="note ${status}">${esc(msg)}</div>`:''}`;
+  return f;
+}
+
+function renderRows() {
+  const onlyIssues = $('#onlyIssues').checked;
+  const wrap = $('#rows');
+  wrap.innerHTML = '';
+  RESULTS.forEach(r => {
+    if (onlyIssues && !r.error && r.issues === 0 && r.warns === 0) return;
+    wrap.appendChild(renderRow(r));
+  });
+}
+
+/* ---------- Orchestrate ---------- */
+async function runScan() {
+  const btn = $('#rescan'); btn.disabled = true;
+  RESULTS = [];
+  $('#rows').innerHTML = '';
+  $('#summary').innerHTML = '';
+  const status = $('#status');
+  for (let i = 0; i < PAGES.length; i++) {
+    status.innerHTML = `<div class="scanning"><div class="spinner"></div>
+      Scanning <strong>${esc(PAGES[i].label)}</strong> <span class="mono" style="color:var(--muted)">(${esc(PAGES[i].path)})</span>
+      <div class="progbar"><span style="width:${Math.round((i)/PAGES.length*100)}%"></span></div>
+      <div style="margin-top:8px;font-size:12px">${i} of ${PAGES.length} pages</div></div>`;
+    const res = await scanPage(PAGES[i]);
+    RESULTS.push(res);
+  }
+  status.innerHTML = '';
+  $('#sandbox').src = 'about:blank';
+  renderSummary();
+  renderRows();
+  $('#scanMeta').innerHTML = 'Scanned ' + RESULTS.filter(r=>!r.error).length + ' / ' + PAGES.length + ' pages · ' +
+    new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  btn.disabled = false;
+}
+
+$('#rescan').addEventListener('click', runScan);
+$('#onlyIssues').addEventListener('change', renderRows);
+runScan();
+</script>
+</body>
+</html>
