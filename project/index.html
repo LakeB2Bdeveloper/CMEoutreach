@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedReachIQ | Healthcare Audience Intelligence for CME</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          ink:   '#0B1F3A',
+          ink2:  '#132D52',
+          teal1: '#0D8A8A',
+          teal2: '#16B3B3',
+          teal3: '#1DCFCF',
+          gold:  '#FFD166',
+          gold2: '#F0A500',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { font-size: var(--body-fs, 19px); }
+  html, body { font-family: 'DM Sans', system-ui, sans-serif; }
+  .font-display { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  /* radial glow used in hero */
+  .hero-glow {
+    background: radial-gradient(closest-side, rgba(13,138,138,0.35), rgba(13,138,138,0) 70%);
+  }
+  /* smooth scroll for in-page anchors */
+  html { scroll-behavior: smooth; }
+  /* subtle grid texture for dark sections */
+  .grid-texture {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  /* keep lucide icons inheriting size */
+  [data-lucide] { width: 1em; height: 1em; }
+  .lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .lift:hover { transform: translateY(-2px); }
+  .tab-active {
+    background: linear-gradient(135deg, #0D8A8A, #16B3B3);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 16px -6px rgba(13,138,138,0.55);
+  }
+  /* progress bar fill animation */
+  @keyframes barFill { from { width: 0; } }
+  .bar > span { animation: barFill 1.2s ease-out both; }
+  /* spin (dashboard Run button loader) */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin .8s linear infinite; }
+  /* pulse dot */
+  @keyframes softPulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .pulse-dot { animation: softPulse 1.8s ease-in-out infinite; }
+
+  /* compliance badge marquee */
+  .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee__track { display: flex; width: max-content; }
+
+  /* ----- Hero image-slot background ----- */
+  image-slot#hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    color: #fff;
+  }
+  image-slot#hero-bg::part(frame) {
+    border-radius: 0 !important;
+    background: transparent;
+  }
+  image-slot#hero-bg::part(empty) {
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  /* dark gradient overlay sits ABOVE image, BELOW content for readability */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(135deg,
+        rgba(11,31,58,0.92) 0%,
+        rgba(19,45,82,0.78) 45%,
+        rgba(10,41,64,0.70) 100%);
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  /* engage the overlay only once an image has been dropped */
+  image-slot#hero-bg[data-filled] ~ .hero-overlay { opacity: 1; }
+
+  /* ----- IntelHub image-slot background (light overlay variant) ----- */
+  image-slot#intel-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    color: #0B1F3A;
+  }
+  image-slot#intel-bg::part(frame) {
+    border-radius: 0 !important;
+    background: transparent;
+  }
+  image-slot#intel-bg::part(empty) {
+    color: rgba(11,31,58,0.6);
+  }
+  .intel-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.92) 0%,
+        rgba(248,250,252,0.88) 60%,
+        rgba(241,245,249,0.94) 100%);
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  image-slot#intel-bg[data-filled] ~ .intel-overlay { opacity: 1; }
+
+  /* ----- Testimonials right-rail image-slot ----- */
+  image-slot#testimonial-img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    display: block;
+    color: rgba(11,31,58,0.6);
+  }
+
+  /* ----- Compliance badge image-slot (on dark bg) ----- */
+  image-slot#compliance-badge {
+    display: block;
+    color: rgba(255,255,255,0.55);
+  }
+  image-slot#compliance-badge::part(frame) {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 0 !important;
+  }
+  image-slot#compliance-badge::part(empty) {
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* ----- Event banner image-slot ----- */
+  image-slot#aha-event {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    color: rgba(255,255,255,0.7);
+  }
+  image-slot#aha-event::part(frame) {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px dashed rgba(255,255,255,0.28);
+  }
+  image-slot#aha-event::part(empty) {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    text-align: center;
+    padding: 16px;
+  }
+
+  /* ----- Personas strip media slot (full-bleed, square edges) ----- */
+  image-slot#personas-strip-media {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    color: rgba(11,31,58,0.55);
+    background: #ffffff;
+  }
+  image-slot#personas-strip-media::part(frame) {
+    background: #ffffff;
+    border: 1.5px dashed rgba(11,31,58,0.18);
+    border-radius: 0 !important;
+  }
+  image-slot#personas-strip-media::part(empty) {
+    color: rgba(11,31,58,0.55);
+    font-size: 13px;
+  }
+
+  /* ----- Mid-page full-bleed feature image (sticky parallax reveal) ----- */
+  /* The slot pins to the top of the viewport; the opaque "Our Solutions"
+     panel below (z-10) scrolls up and over it for a reveal-parallax effect.
+     The .reveal-group wrapper BOUNDS the sticky range to image + Solutions,
+     so the image releases afterward and never covers later sections (footer). */
+  .reveal-group { position: relative; }
+  image-slot#midpage-feature {
+    display: block;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    color: rgba(11,31,58,0.55);
+    background: #eef2f6;
+  }
+  image-slot#midpage-feature::part(frame) {
+    background: #eef2f6;
+    border: 1.5px dashed rgba(11,31,58,0.2);
+    border-radius: 0 !important;
+  }
+  image-slot#midpage-feature::part(empty) {
+    color: rgba(11,31,58,0.55);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body class="bg-white text-ink antialiased selection:bg-teal2 selection:text-white">
+  <div id="root"></div>
+
+  <!-- ───────── Hidden SEO Inspector launcher ─────────
+       Type the letters  s e o  in quick succession anywhere on the page
+       (outside a text field) to open the audit. Lives in an external file
+       because this preview strips inline scripts. -->
+  <script src="seo-launcher.js"></script>
+
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0B1F3A"/>
+          <stop offset="100%" stop-color="#0F3D5C"/>
+        </linearGradient>
+        <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#2BB6A1"/>
+          <stop offset="100%" stop-color="#5DD6C0"/>
+        </linearGradient>
+      </defs>
+      <rect width="200" height="200" fill="url(#bg)"/>
+      <g transform="translate(60 60)">
+        <rect x="0" y="0" width="80" height="80" rx="14" fill="url(#accent)"/>
+        <text x="40" y="56" font-family="Georgia, serif" font-weight="900" font-size="44" text-anchor="middle" fill="#0B1F3A">M</text>
+      </g>
+    </svg>
+  </template>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <!-- Image drop slot (for hero background) -->
+  <script src="image-slot.js"></script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
