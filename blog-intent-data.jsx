@@ -2,8 +2,12 @@ const { useState, useEffect, useRef } = React;
 const { Icon, Nav, Footer } = window;
 
 /* keyword highlight helpers */
-const KP = ({ children }) => <span className="kw-primary">{children}</span>;
-const KW = ({ children }) => <span className="kw">{children}</span>;
+const KP = ({ children, href }) => href
+  ? <a href={href} className="kw-primary">{children}</a>
+  : <span className="kw-primary">{children}</span>;
+const KW = ({ children, href }) => href
+  ? <a href={href} className="kw">{children}</a>
+  : <span className="kw">{children}</span>;
 
 /* ----------------------------- Article header -------------------------- */
 function ArticleHead() {
@@ -22,7 +26,7 @@ function ArticleHead() {
           How healthcare intent data <em className="not-italic text-teal3">really works</em>
         </h1>
         <div className="flex items-center gap-3 flex-wrap text-[13px] text-white/55 font-medium">
-          <span>MedReachIQ Team</span>
+          <span>CMEIntent Team</span>
           <span className="w-1 h-1 rounded-full bg-white/30" />
           <span>May 2026</span>
           <span className="w-1 h-1 rounded-full bg-white/30" />
@@ -45,14 +49,14 @@ function Article() {
           radius="24"
           fit="cover"
           placeholder="Drop or click to upload the lead image"
-          style={{ width: "100%", height: "auto", aspectRatio: "1200 / 520", display: "block" }}>
+          style={{ width: "100%", height: "auto", aspectRatio: "2 / 1", display: "block" }}>
         </image-slot>
         <figcaption className="text-center text-[12px] text-slate-400 mt-6 font-medium">Intent scoring blends thousands of behavioral signals into a single readiness score per clinician.</figcaption>
       </figure>
 
       {/* Body */}
       <div className="post-body max-w-[680px] mx-auto px-6 pt-12 pb-4">
-        <p className="lead-para">Every accredited education team wants the same thing: to reach the right clinician at the moment they're actually looking to learn. <KP>Healthcare intent data</KP> is how you find that moment, but the term gets thrown around so loosely that it's worth saying plainly what it is, where it comes from, and how to act on it.</p>
+        <p className="lead-para">Every accredited education team wants the same thing: to reach the right clinician at the moment they're actually looking to learn. <KP href="solutions/cme-audience-intelligence.html">Healthcare intent data</KP> is how you find that moment, but the term gets thrown around so loosely that it's worth saying plainly what it is, where it comes from, and how to act on it.</p>
 
         <p>At its core, intent data is a record of behavior. When a cardiologist repeatedly reads about a new heart-failure guideline, registers for a webinar, and revisits a board-recertification page, those actions form a pattern. <KW>Physician intent signals</KW> turn that pattern into something you can score, segment, and time your outreach around.</p>
 
@@ -62,14 +66,14 @@ function Article() {
         <ul>
           <li><strong>Content consumption.</strong> Which clinical topics a clinician reads, watches, and downloads, and how deeply.</li>
           <li><strong>Search behavior.</strong> Queries like "online CME credits" or a specific therapeutic area that reveal active, in-market interest.</li>
-          <li><strong>Credential timing.</strong> Where a physician sits in their license-renewal and <KW>MOC recertification</KW> cycle, the single strongest predictor of CME readiness.</li>
+          <li><strong>Credential timing.</strong> Where a physician sits in their license-renewal and <KW href="services/maintenance-of-certification-marketing.html">MOC recertification</KW> cycle, the single strongest predictor of CME readiness.</li>
           <li><strong>Engagement cadence.</strong> Email opens, repeat visits, and webinar attendance that show momentum rather than a one-off glance.</li>
         </ul>
 
         <blockquote className="pullquote">A signal isn't intent. A pattern of signals, scored over time, is intent, and that distinction is the whole game.</blockquote>
 
         <h2>From raw signals to a readiness score</h2>
-        <p>Once signals are collected, they're matched to a verified clinician record using <KP>NPI validation</KP> and active-licensure confirmation, then rolled into a single score per topic. That's what makes <KW>intent-based targeting</KW> usable: instead of a spreadsheet of clicks, you get a ranked list of physicians most likely to enroll in a given activity this week.</p>
+        <p>Once signals are collected, they're matched to a verified clinician record using <KP href="solutions/cme-audience-intelligence.html">NPI validation</KP> and active-licensure confirmation, then rolled into a single score per topic. That's what makes <KW>intent-based targeting</KW> usable: instead of a spreadsheet of clicks, you get a ranked list of physicians most likely to enroll in a given activity this week.</p>
 
         <p>Crucially, the score decays. Interest that fired three months ago shouldn't be weighted like interest from yesterday, so the model continuously re-scores as new behavior arrives and old behavior ages out. This is why a static purchased list goes stale while an <KW>intent-active audience</KW> stays current.</p>
 
@@ -81,7 +85,7 @@ function Article() {
             radius="16"
             fit="cover"
             placeholder="Optional: drop a chart or diagram here"
-            style={{ width: "100%", height: "auto", aspectRatio: "16 / 7", display: "block" }}>
+            style={{ width: "100%", height: "auto", aspectRatio: "2 / 1", display: "block" }}>
           </image-slot>
           <figcaption className="text-[12px] text-slate-400 mt-6 font-medium">Intent decays over time: yesterday's signal outweighs last quarter's.</figcaption>
         </figure>
@@ -109,9 +113,9 @@ function Article() {
 
 /* --------------------------- Related reading --------------------------- */
 const RELATED = [
-{ href: "blog-intent-data.html", category: "Targeting", title: "Top healthcare audience targeting strategies", excerpt: "Layer NPI data, prescribing patterns, and board-certification timelines to build physician groups that convert." },
-{ href: "blog-intent-data.html", category: "MOC", title: "Reaching physicians during MOC renewal windows", excerpt: "Board recertification deadlines are the strongest intent signal in medical education. Here's how to time outreach." },
-{ href: "blog-intent-data.html", category: "Compliance", title: "HIPAA-compliant CME outreach: what's allowed", excerpt: "The line between compliant physician marketing and a privacy violation is narrower than most teams think." }];
+{ href: "blog-hcp-targeting.html", category: "Targeting", title: "HCP targeting and audience segmentation, a precision playbook", excerpt: "Turn physician targeting data into narrow, current segments that fill conferences and drive enrollment." },
+{ href: "blog-healthcare-lead-generation.html", category: "Lead Generation", title: "Healthcare lead generation for CME", excerpt: "From intent signal to enrollment, how a modern lead engine produces qualified clinicians." },
+{ href: "blog-medical-professional-database.html", category: "Data", title: "What makes a medical professional database worth using", excerpt: "Coverage, accuracy, and segmentation depth that separate a real clinician database from a stale list." }];
 
 
 function Related() {
@@ -166,7 +170,7 @@ function ArticleCTA() {
 /* ------------------------------- Page ---------------------------------- */
 function ArticlePage() {
   useEffect(() => {
-    document.title = "How healthcare intent data works | MedReachIQ";
+    document.title = "How Healthcare Intent Data Works for CME Marketing | CMEIntent";
   }, []);
   return (
     <div className="bg-white text-ink font-sans antialiased selection:bg-teal2 selection:text-white">

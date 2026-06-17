@@ -13,57 +13,30 @@ const FEATURED = {
 
 const POSTS = [
 {
-  href: "blog-intent-data.html",
+  href: "blog-healthcare-lead-generation.html",
+  category: "Lead Generation",
+  icon: "magnet",
+  title: "Healthcare lead generation for CME, from intent to enrollment",
+  excerpt: "How a modern lead engine resolves real interest to verified clinicians, scores it honestly, and turns healthcare marketing leads into completed enrollments.",
+  meta: "Jun 2026 · 9 min read",
+  dark: true },
+
+{
+  href: "blog-medical-professional-database.html",
+  category: "Data",
+  icon: "database",
+  title: "What makes a medical professional database worth using",
+  excerpt: "Coverage, accuracy, and segmentation depth are what separate a real clinician database and medical specialty database from a stale, decaying list.",
+  meta: "Jun 2026 · 9 min read",
+  dark: false },
+
+{
+  href: "blog-hcp-targeting.html",
   category: "Targeting",
-  icon: "crosshair",
-  title: "Top healthcare audience targeting strategies",
-  excerpt: "Layer NPI data, prescribing patterns, practice affiliation, and board-certification timelines to build custom physician groups that actually convert.",
-  meta: "Apr 2026 · 6 min read",
-  dark: false },
-
-{
-  href: "blog-intent-data.html",
-  category: "Compliance",
-  icon: "lock",
-  title: "HIPAA-compliant CME outreach: what's actually allowed",
-  excerpt: "The line between compliant physician marketing and a privacy violation is narrower than most teams think. A plain-English guide to staying on the right side of it.",
-  meta: "Apr 2026 · 7 min read",
-  dark: true },
-
-{
-  href: "blog-intent-data.html",
-  category: "Deliverability",
-  icon: "mail-check",
-  title: "How to reach physicians at 94%+ inbox placement",
-  excerpt: "Verification, NCOA validation, and sender-authentication hygiene that keeps your CME invitations out of the spam folder and in front of clinicians.",
-  meta: "Mar 2026 · 5 min read",
-  dark: false },
-
-{
-  href: "blog-intent-data.html",
-  category: "MOC",
-  icon: "calendar-clock",
-  title: "Reaching physicians during MOC renewal windows",
-  excerpt: "Board recertification deadlines are the strongest intent signal in medical education. Here's how to time outreach to the renewal cycle for same-week enrollment.",
-  meta: "Mar 2026 · 6 min read",
-  dark: true },
-
-{
-  href: "blog-intent-data.html",
-  category: "Strategy",
-  icon: "hospital",
-  title: "Account-based CME marketing for health systems",
-  excerpt: "Target every eligible physician and APP within a hospital system concurrently: an ABM playbook built specifically for accredited education teams.",
-  meta: "Feb 2026 · 8 min read",
-  dark: false },
-
-{
-  href: "blog-intent-data.html",
-  category: "Attribution",
-  icon: "circle-dollar-sign",
-  title: "Connecting CME enrollment back to campaign ROI",
-  excerpt: "Multi-touch attribution that ties every completion back to its originating asset, so you can finally prove which channels drive accredited activity.",
-  meta: "Feb 2026 · 7 min read",
+  icon: "target",
+  title: "HCP targeting and audience segmentation, a precision playbook",
+  excerpt: "Turn verified physician targeting data and HCP behavioral data into narrow, current segments that fill conferences and drive enrollment.",
+  meta: "Jun 2026 · 9 min read",
   dark: true }];
 
 
@@ -87,7 +60,7 @@ function BlogHero() {
           Thoughts &amp; <em className="not-italic text-teal3">Insights</em>
         </h1>
         <p className="text-white/70 text-lg max-w-2xl leading-relaxed">
-          Frameworks, benchmarks, and playbooks from the MedReachIQ team, built for accreditation leaders, medical-education marketers, and audience strategists who need accurate physician data and provable outcomes.
+          Frameworks, benchmarks, and playbooks from the CMEIntent team, built for accreditation leaders, medical-education marketers, and audience strategists who need accurate physician data and provable outcomes.
         </p>
       </div>
     </header>);
@@ -106,7 +79,7 @@ function Featured() {
           shape="rect"
           fit="cover"
           placeholder="Lead image"
-          style={{ display: "block", width: "100%", height: "auto", aspectRatio: "1200 / 520", pointerEvents: "none" }}>
+          style={{ display: "block", width: "100%", height: "auto", aspectRatio: "2 / 1", pointerEvents: "none" }}>
         </image-slot>
       </div>
       {/* Body */}
@@ -194,7 +167,7 @@ function BlogCTA() {
 /* ------------------------------- Page ---------------------------------- */
 function BlogPage() {
   useEffect(() => {
-    document.title = "Blog | MedReachIQ";
+    document.title = "CME Marketing & Healthcare Intent Data Blog | CMEIntent";
   }, []);
   return (
     <div className="bg-white text-ink font-sans antialiased selection:bg-teal2 selection:text-white">

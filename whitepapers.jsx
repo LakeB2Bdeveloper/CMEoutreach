@@ -7,7 +7,7 @@ const PAPERS = [
   topic: "Benchmark Report",
   icon: "bar-chart-3",
   title: "The 2026 CME Audience Benchmark Report",
-  excerpt: "Deliverability, enrollment, and intent benchmarks from 2,300+ healthcare organizations — with playbooks to match your therapeutic area.",
+  excerpt: "Deliverability, enrollment, and intent benchmarks from 2,300+ healthcare organizations, with playbooks to match your therapeutic area.",
   meta: "24 pages · PDF" },
 
 {
@@ -28,7 +28,7 @@ const PAPERS = [
   topic: "Compliance",
   icon: "shield-check",
   title: "Building Compliant HCP Audiences",
-  excerpt: "A field guide to HIPAA, CAN-SPAM, and ACCME-aligned data sourcing — so your outreach stays defensible at every layer.",
+  excerpt: "A field guide to HIPAA, CAN-SPAM, and ACCME-aligned data sourcing, so your outreach stays defensible at every layer.",
   meta: "12 pages · PDF" },
 
 {
@@ -42,7 +42,7 @@ const PAPERS = [
   topic: "Attribution",
   icon: "circle-dollar-sign",
   title: "Multi-Touch Attribution for CME Programs",
-  excerpt: "Connect every enrollment and completion back to its originating asset — and prove ROI to the funders and stakeholders who matter.",
+  excerpt: "Connect every enrollment and completion back to its originating asset, and prove ROI to the funders and stakeholders who matter.",
   meta: "15 pages · PDF" }];
 
 
@@ -144,7 +144,7 @@ function PapersCTA() {
 /* ------------------------------- Page ---------------------------------- */
 function WhitepapersPage() {
   useEffect(() => {
-    document.title = "Whitepapers | MedReachIQ";
+    document.title = "Healthcare Marketing Whitepapers & Research | CMEIntent";
   }, []);
   return (
     <div className="bg-white text-ink font-sans antialiased selection:bg-teal2 selection:text-white">

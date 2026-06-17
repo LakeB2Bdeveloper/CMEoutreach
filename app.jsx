@@ -47,7 +47,7 @@ const tabs = [
 {
   btnLabel: "Live & Virtual CME",
   title: "Drive Enrollment for Live & Virtual CME Events",
-  desc: "Physician webinar marketing strategies that work require more than a generic email blast. MedReachIQ identifies clinicians with active intent to attend CME aligned with their specialty.",
+  desc: "Physician webinar marketing strategies that work require more than a generic email blast. CMEIntent identifies clinicians with active intent to attend CME aligned with their specialty.",
   bullets: [
   "Healthcare webinar attendance strategies powered by real-time intent signals from 2.1M+ verified physicians",
   "Physician engagement strategies using personalized, specialty-specific messaging frameworks",
@@ -66,7 +66,7 @@ const tabs = [
 {
   btnLabel: "Enduring Materials",
   title: "Scale Completions for Enduring CME Materials",
-  desc: "Enduring materials represent your highest-ROI CME asset, available 24/7 and scalable to any audience size. MedReachIQ keeps your enduring materials discoverable and converting year-round.",
+  desc: "Enduring materials represent your highest-ROI CME asset, available 24/7 and scalable to any audience size. CMEIntent keeps your enduring materials discoverable and converting year-round.",
   bullets: [
   "Intent-triggered outreach: automatically reach physicians researching your content's therapeutic area",
   "Retargeting sequences re-engaging physicians who viewed but didn't complete your educational activity",
@@ -104,7 +104,7 @@ const tabs = [
 {
   btnLabel: "MOC Programs",
   title: "Connect Clinicians to MOC & Board Certification Resources",
-  desc: "Maintenance of Certification programs represent the highest-urgency CME need a physician will have. MedReachIQ identifies clinicians approaching their deadlines.",
+  desc: "Maintenance of Certification programs represent the highest-urgency CME need a physician will have. CMEIntent identifies clinicians approaching their deadlines.",
   bullets: [
   "MOC deadline intelligence: target physicians within 12–18 months of board recertification requirements",
   "Board-specific targeting across all major ABMS member boards and specialty societies",
@@ -157,10 +157,9 @@ const complianceItems = [
 
 
 const testimonials = [
-{ initials: "SM", name: "Sarah M.", role: "CME Director, Academic Medical Center", quote: "MedReachIQ completely changed how we think about physician webinar marketing. Our virtual CME enrollment tripled in 90 days using their intent-based targeting." },
+{ initials: "SM", name: "Sarah M.", role: "CME Director, Academic Medical Center", quote: "CMEIntent completely changed how we think about physician webinar marketing. Our virtual CME enrollment tripled in 90 days using their intent-based targeting." },
 { initials: "RJ", name: "Robert J.", role: "VP Medical Education, National Medical Society", quote: "The HIPAA-compliant data quality and email deliverability are genuinely best-in-class. We moved from an unoptimized deliverability rate to a reliable 94% overnight." },
-{ initials: "KL", name: "Karen L.", role: "Accreditation Manager, Specialty Board CME Provider", quote: "As an accreditation team we were skeptical about any vendor claiming ACCME alignment. MedReachIQ's approach genuinely supports independence standards." },
-{ initials: "DP", name: "David P.", role: "Director of CME, Regional Health System", quote: "The MOC deadline intelligence alone justified the investment. We're now reaching cardiologists and oncologists exactly when they're searching for board recertification activities, and our same-day registration rate has jumped past 20%." }];
+{ initials: "KL", name: "Karen L.", role: "Accreditation Manager, Specialty Board CME Provider", quote: "As an accreditation team we were skeptical about any vendor claiming ACCME alignment. CMEIntent's approach genuinely supports independence standards." }];
 
 
 /* ------------------------------ Sections ------------------------------ */
@@ -171,9 +170,9 @@ function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-ink/95 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
         <a href="#" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal1 to-teal2 flex items-center justify-center text-white font-black text-lg font-display">M</div>
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal1 to-teal2 flex items-center justify-center text-white font-black text-lg font-display">C</div>
           <span className="font-display font-extrabold text-xl text-white tracking-tight">
-            MedReach<span className="text-teal3">IQ</span>
+            CME<span className="text-teal3">Intent</span>
           </span>
         </a>
 
@@ -185,10 +184,10 @@ function Nav() {
             <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
               <div className="bg-ink border border-white/10 rounded-xl shadow-2xl shadow-black/50 w-72 p-2">
                 {[
-                { href: "solution-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
-                { href: "solution-cme-targeting.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
-                { href: "solution-multichannel-marketing.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
-                { href: "solution-nursing.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }].
+                { href: "solutions/cme-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
+                { href: "solutions/hcp-outreach.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
+                { href: "solutions/alumni-outreach.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
+                { href: "solutions/nurse-audience-intelligence.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }].
                 map((s, i) =>
                 <a key={i} href={s.href} className="flex gap-3 items-start p-3 rounded-lg hover:bg-white/5 transition">
                     <span className="font-display font-extrabold text-teal3 text-sm leading-tight pt-0.5">{s.num}</span>
@@ -202,6 +201,18 @@ function Nav() {
             </div>
           </li>
           <li className="relative group">
+            <a href="services/cme-marketing.html" className="hover:text-teal3 transition inline-flex items-center gap-1">
+              Services <Icon name="chevron-down" size={14} />
+            </a>
+            <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+              <div className="bg-ink border border-white/10 rounded-xl shadow-2xl shadow-black/50 w-64 p-2">
+                <a href="services/cme-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Marketing Services</a>
+                <a href="services/maintenance-of-certification-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">MOC Marketing Services</a>
+                <a href="services/lead-generation.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Lead Generation Services</a>
+              </div>
+            </div>
+          </li>
+          <li className="relative group">
             <a href="use-cases.html" className="hover:text-teal3 transition inline-flex items-center gap-1">
               Process <Icon name="chevron-down" size={14} />
             </a>
@@ -209,7 +220,7 @@ function Nav() {
               <div className="bg-ink border border-white/10 rounded-xl shadow-2xl shadow-black/50 w-60 p-2">
                 <a href="use-cases.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">Use Cases</a>
                 <a href="personas.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">Personas &amp; Intent</a>
-                <a href="how-it-works.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">How MedReachIQ Works</a>
+                <a href="how-it-works.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">How CMEIntent Works</a>
               </div>
             </div>
           </li>
@@ -222,7 +233,7 @@ function Nav() {
                 <a href="blog.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">Blog</a>
                 <a href="case-studies.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">Case Studies</a>
                 <a href="whitepapers.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">Whitepapers</a>
-                <a href="#" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">FAQs</a>
+                <a href="faqs.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">FAQs</a>
               </div>
             </div>
           </li>
@@ -240,7 +251,7 @@ function Nav() {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="#demo" className="px-4 py-2 bg-gradient-to-br from-teal1 to-teal2 shadow-md hover:shadow-lg text-white text-sm font-semibold rounded-md transition lift">Request Demo</a>
+          <button onClick={() => window.dispatchEvent(new CustomEvent("open-demo"))} className="px-4 py-2 bg-gradient-to-br from-teal1 to-teal2 shadow-md hover:shadow-lg text-white text-sm font-semibold rounded-md transition lift">Request Demo</button>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setOpen(!open)} aria-label="Toggle menu">
@@ -250,25 +261,30 @@ function Nav() {
 
       {open && <div className="md:hidden bg-ink border-b border-white/10 px-6 py-4 flex flex-col gap-3">
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Solutions</div>
-          <a href="solution-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">01 · CME Audience Intelligence</a>
-          <a href="solution-cme-targeting.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">02 · HCP Outreach</a>
-          <a href="solution-multichannel-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">03 · Alumni Growth Engine</a>
-          <a href="solution-nursing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">04 · Nurse Audience Intelligence</a>
+          <a href="solutions/cme-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">01 · CME Audience Intelligence</a>
+          <a href="solutions/hcp-outreach.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">02 · HCP Outreach</a>
+          <a href="solutions/alumni-outreach.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">03 · Alumni Growth Engine</a>
+          <a href="solutions/nurse-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">04 · Nurse Audience Intelligence</a>
+          <div className="h-px bg-white/10 my-1" />
+          <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Services</div>
+          <a href="services/cme-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Marketing Services</a>
+          <a href="services/maintenance-of-certification-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">MOC Marketing Services</a>
+          <a href="services/lead-generation.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Lead Generation Services</a>
           <div className="h-px bg-white/10 my-1" />
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Process</div>
           <a href="use-cases.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Use Cases</a>
           <a href="personas.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Personas &amp; Intent</a>
-          <a href="how-it-works.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">How MedReachIQ Works</a>
+          <a href="how-it-works.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">How CMEIntent Works</a>
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-2">Resources</div>
           <a href="blog.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Blog</a>
           <a href="case-studies.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Case Studies</a>
           <a href="whitepapers.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Whitepapers</a>
-          <a href="#" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">FAQs</a>
+          <a href="faqs.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">FAQs</a>
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-2">Company</div>
           <a href="#" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">About</a>
           <a href="contact.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Contact</a>
           <div className="h-px bg-white/10 my-1" />
-          <a href="#demo" onClick={() => setOpen(false)} className="w-full text-center py-2.5 bg-gradient-to-br from-teal1 to-teal2 text-white rounded-md font-semibold text-sm">Request Demo</a>
+          <button onClick={() => {setOpen(false);window.dispatchEvent(new CustomEvent("open-demo"));}} className="w-full text-center py-2.5 bg-gradient-to-br from-teal1 to-teal2 text-white rounded-md font-semibold text-sm">Request Demo</button>
         </div>
       }
     </nav>);
@@ -440,9 +456,7 @@ function Hero({ heroGradient = "Deep Navy" }) {
           <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.4rem] text-white leading-[1.1] tracking-tight mb-6 text-balance" style={{ fontWeight: "900", width: "550px", fontSize: "56px" }}>
             Turn <em className="not-italic text-teal3">HCP Intent</em> Into <span className="text-gold">CME Enrollment</span>
           </h1>
-          <p className="text-white/70 text-lg max-w-xl mb-8 leading-relaxed" style={{ fontSize: "21px" }}>
-            MedReachIQ delivers HIPAA-compliant healthcare audience intelligence and CME marketing solutions that help ACCME-accredited organizations fill their live and virtual CME, grand rounds, enduring materials, and RSS programs.
-          </p>
+          <p className="text-white/70 text-lg max-w-xl mb-8 leading-relaxed" style={{ fontSize: "21px" }}><span style={{ color: "#ffffff" }}>CMEIntent delivers HIPAA-compliant healthcare intent data and CME marketing solutions that help ACCME-accredited organizations promote CME courses for physicians through smarter continuing medical education marketing.<br /><br />Now fill live and virtual CME, grand rounds, enduring materials, and RSS programs with ease.</span></p>
           <div className="flex flex-wrap gap-4 mb-8">
             <a href="#demo" className="px-6 py-3.5 bg-gradient-to-br from-gold2 to-gold text-ink font-bold rounded-lg shadow-lg hover:shadow-xl transition lift flex items-center gap-2" style={{ fontSize: "17px" }}>
               Book a Quick Demo <Icon name="arrow-right" size={18} />
@@ -498,7 +512,7 @@ function EventBanner() {
               We'll Be There · July 2026
             </div>
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white leading-[1.12] tracking-tight mb-4 text-balance">
-              Meet MedReachIQ at the <span className="text-teal3">AHA Leadership Summit</span>
+              Meet CMEIntent at the <span className="text-teal3">AHA Leadership Summit</span>
             </h2>
             <p className="text-white/70 leading-relaxed mb-6 max-w-xl">
               The American Hospital Association (AHA) Leadership Summit is coming up in July 2026, and our team will be on the ground. Let's talk about how intent-driven audience intelligence can lift your CME enrollment and engagement.
@@ -543,13 +557,13 @@ function PainPoints() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {painPoints.map((item, idx) =>
-        <div key={idx} className={`rounded-2xl p-7 lift shadow-sm hover:shadow-lg relative overflow-hidden group ${item.blue ? "bg-ink border border-ink2 hover:border-teal3" : "border border-slate-100 bg-white hover:border-teal2"}`}>
+          <div key={idx} className={`rounded-2xl p-7 lift shadow-sm hover:shadow-lg relative overflow-hidden group ${item.blue ? "bg-ink border border-ink2 hover:border-teal3" : "border border-slate-100 bg-white hover:border-teal2"}`}>
             <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal1 to-teal2 opacity-0 group-hover:opacity-100 transition" />
             <div className={`mb-4 ${item.blue ? "text-teal3" : item.iconColor}`}><Icon name={item.icon} size={32} strokeWidth={1.75} /></div>
             <h3 className={`font-display font-bold text-base mb-2 ${item.blue ? "text-white" : "text-ink"}`}>{item.title}</h3>
             <p className="text-sm leading-relaxed" style={{ color: item.blue ? "rgba(255,255,255,0.7)" : "rgb(6, 30, 63)" }}>{item.text}</p>
           </div>
-        )}
+          )}
       </div>
     </section>
     </React.Fragment>);
@@ -594,7 +608,7 @@ function PersonasStrip() {
 const solutions = [
 {
   num: "01",
-  slug: "solution-audience-intelligence.html",
+  slug: "solutions/cme-audience-intelligence.html",
   kicker: "CME",
   title: "CME Audience Intelligence",
   focus: "Targeted CME campaigns that drive registrations and participation",
@@ -604,7 +618,7 @@ const solutions = [
   "CME Audience Targeting",
   "Clinical Interest Insights",
   "HCP Intent & Engagement Signals",
-  "CME Event Marketing",
+  "CME Specialty Intelligence",
   "CME Event Attendee Nurturing",
   "HCP Acquisition"],
 
@@ -612,7 +626,7 @@ const solutions = [
 },
 {
   num: "02",
-  slug: "solution-cme-targeting.html",
+  slug: "solutions/hcp-outreach.html",
   kicker: "Outreach",
   title: "HCP Outreach",
   focus: "Niche audience intelligence powered by intent and specialty signals",
@@ -628,7 +642,7 @@ const solutions = [
 },
 {
   num: "03",
-  slug: "solution-multichannel-marketing.html",
+  slug: "solutions/alumni-outreach.html",
   kicker: "Alumni",
   title: "Alumni Growth Engine",
   focus: "Turn alumni relationships into new revenue and growth",
@@ -645,7 +659,7 @@ const solutions = [
 },
 {
   num: "04",
-  slug: "solution-nursing.html",
+  slug: "solutions/nurse-audience-intelligence.html",
   kicker: "Nursing",
   title: "Nurse Audience Intelligence",
   focus: "Reach the full nursing workforce, from CNAs to APRNs",
@@ -670,8 +684,8 @@ function FullBleedImage() {
       shape="rect"
       aria-label="Featured image"
       placeholder="Drop your image here — it will fill this full-bleed band">
-    </image-slot>
-  );
+    </image-slot>);
+
 
 }
 
@@ -725,7 +739,7 @@ function HowItWorks() {
       <div className="absolute inset-0 grid-texture opacity-30 pointer-events-none" />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-bold text-teal3 uppercase tracking-widest block mb-2">How MedReachIQ Works</span>
+          <span className="text-xs font-bold text-teal3 uppercase tracking-widest block mb-2">How CMEIntent Works</span>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl mb-4 tracking-tight text-balance">
             From <span className="text-teal3">Intent Signal</span> to Enrolled Clinician in 4 Steps
           </h2>
@@ -832,7 +846,7 @@ function UseCases() {
         <h2 className="font-display font-extrabold text-3xl text-ink mb-4 tracking-tight text-balance">
           Built for Every CME Format &amp; <em className="not-italic text-teal1">Educational Activity</em>
         </h2>
-        <p className="text-slate-500" style={{ color: "rgb(6, 30, 63)" }}>Whether you're filling seats for a grand rounds series or scaling enrollment for enduring digital materials, MedReachIQ has a proven playbook.</p>
+        <p className="text-slate-500" style={{ color: "rgb(6, 30, 63)" }}>Whether you're filling seats for a grand rounds series or scaling enrollment for enduring digital materials, CMEIntent has a proven playbook.</p>
       </div>
 
       <div className="flex flex-wrap gap-2 justify-center mb-8">
@@ -887,7 +901,7 @@ function IntelHub() {
   return (
     <section className="relative py-20 px-6 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
       {/* Drag-and-drop section background — drop an image into the dashed slot
-                                                    to fill the whole section. A light overlay keeps dark text readable. */}
+                                                        to fill the whole section. A light overlay keeps dark text readable. */}
       <image-slot
         id="intel-bg"
         shape="rect"
@@ -900,7 +914,7 @@ function IntelHub() {
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-ink mb-4 tracking-tight text-balance">
             Resources for <em className="not-italic text-teal1">Modern CME Marketers</em>
           </h2>
-          <p className="text-slate-500" style={{ color: "rgb(6, 30, 63)" }}>Field-tested frameworks, benchmarks, and playbooks from the MedReachIQ team.
+          <p className="text-slate-500" style={{ color: "rgb(6, 30, 63)" }}>Field-tested frameworks, benchmarks, and playbooks from the CMEIntent team.
 Built for accreditation leaders, medical education marketers, and audience strategists.</p>
         </div>
 
@@ -1002,7 +1016,7 @@ function Compliance() {
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl mb-4 tracking-tight text-balance">
             Engineered for the <span className="text-teal3">Regulatory Reality</span> of Healthcare Marketing
           </h2>
-          <p className="text-white/65 leading-relaxed mb-6 max-w-2xl mx-auto">MedReachIQ was built from day one to operate inside the strictest privacy and accreditation frameworks in the industry, without forcing your team to slow down.</p>
+          <p className="text-white/65 leading-relaxed mb-6 max-w-2xl mx-auto">CMEIntent was built from day one to operate inside the strictest privacy and accreditation frameworks in the industry, without forcing your team to slow down.</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {["HIPAA", "SOC 2 Type II", "CAN-SPAM", "ACCME-Aligned", "CASL", "GDPR Ready", "NCOA", "NPI Verified"].map((b, i) =>
             <span key={i} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/15 text-[11px] font-semibold tracking-wide text-white/80">{b}</span>
@@ -1034,16 +1048,7 @@ function Testimonials() {
           Trusted by <em className="not-italic text-teal1">Accreditation &amp; Medical Education Teams</em>
         </h2>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto items-stretch">
-        {/* Drag-and-drop left-rail image */}
-        <div className="lg:col-span-1 relative rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 min-h-[320px]">
-          <image-slot
-            id="testimonial-img"
-            shape="rect"
-            placeholder="Drop an image for this section">
-          </image-slot>
-        </div>
-        <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto items-stretch">
           {testimonials.map((t, i) =>
           <figure key={i} className="bg-white border border-slate-100 rounded-2xl p-7 lift hover:border-teal2 hover:shadow-lg relative">
               <div className="flex gap-1 mb-4 text-gold2" style={{ color: "rgb(245, 173, 4)" }}>
@@ -1061,7 +1066,6 @@ function Testimonials() {
               </figcaption>
             </figure>
           )}
-        </div>
       </div>
     </section>);
 
@@ -1125,7 +1129,7 @@ function CTA() {
               <span className="w-2 h-2 rounded-full bg-teal3 pulse-dot" /> Limited Pilot Slots, Q3 2026
             </div>
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white mb-4 tracking-tight text-balance">
-              See your CME audience the way <em className="not-italic text-gold">MedReachIQ</em> sees it.
+              See your CME audience the way <em className="not-italic text-gold">CMEIntent</em> sees it.
             </h2>
             <p className="text-white/70 mb-8 max-w-xl leading-relaxed">
               In a 30-minute demo, we'll show you the verified, intent-active clinicians inside your therapeutic area and walk through a sample campaign tailored to your CME program type.
@@ -1174,8 +1178,8 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-12">
           <div className="col-span-2">
             <a href="#" className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal1 to-teal2 flex items-center justify-center text-white font-black text-lg font-display">M</div>
-              <span className="font-display font-extrabold text-xl text-white tracking-tight">MedReach<span className="text-teal3">IQ</span></span>
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal1 to-teal2 flex items-center justify-center text-white font-black text-lg font-display">C</div>
+              <span className="font-display font-extrabold text-xl text-white tracking-tight">CME<span className="text-teal3">Intent</span></span>
             </a>
             <p className="text-white/55 text-sm max-w-sm leading-relaxed mb-5">
               Healthcare audience intelligence for ACCME-accredited organizations. Built for CME, MOC, and medical conference marketing teams who need accurate physician data and provable outcomes.
@@ -1189,13 +1193,15 @@ function Footer() {
             </div>
           </div>
           {col("Solutions", ["CME Audience Intelligence", "HCP Outreach", "Alumni Growth Engine", "Nurse Audience Intelligence"])}
-          {col("Process", [{ label: "Use Cases", href: "use-cases.html" }, { label: "Personas & Intent", href: "personas.html" }, { label: "How MedReachIQ Works", href: "how-it-works.html" }])}
+          {col("Services", [{ label: "CME Marketing Services", href: "services/cme-marketing.html" }, { label: "MOC Marketing Services", href: "services/maintenance-of-certification-marketing.html" }, { label: "CME Lead Generation Services", href: "services/lead-generation.html" }])}
+          {col("Process", [{ label: "Use Cases", href: "use-cases.html" }, { label: "Personas & Intent", href: "personas.html" }, { label: "How CMEIntent Works", href: "how-it-works.html" }])}
           {col("Resources", [{ label: "Blogs", href: "blog.html" }, { label: "Case Studies", href: "case-studies.html" }, { label: "Whitepapers", href: "whitepapers.html" }, "FAQs"])}
           {col("Company", ["About", { label: "Contact", href: "contact.html" }])}
         </div>
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-4 text-[11px] text-white/40">
-          <div>© 2026 MedReachIQ. All rights reserved. MedReachIQ is not an ACCME-accredited provider; we support accredited organizations.</div>
+          <div>© 2026 CMEIntent. All rights reserved. CMEIntent is not an ACCME-accredited provider; we support accredited organizations.</div>
           <div className="flex gap-5">
+            <a href="seo-inspector.html" className="hover:text-teal3 transition">SEI</a>
             <a href="#" className="hover:text-teal3 transition">Privacy</a>
             <a href="#" className="hover:text-teal3 transition">Terms</a>
             <a href="#" className="hover:text-teal3 transition">HIPAA Notice</a>
@@ -1237,6 +1243,152 @@ function lighten(hex, amt = 0.18) {
   g = Math.round(g + (255 - g) * amt);
   b = Math.round(b + (255 - b) * amt);
   return "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
+}
+
+/* --------------------------- Demo lead modal --------------------------- */
+const DEMO_BENEFITS = [
+"A free audience scan of your therapeutic area",
+"Benchmarks for CME open, click, and enrollment rates",
+"A sample HIPAA-compliant outreach sequence",
+"Pricing tailored to your accreditation footprint"];
+
+function DemoModal() {
+  const [open, setOpenModal] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", org: "", role: "", goal: "", notes: "" });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const handler = () => {setSent(false);setErrors({});setForm({ name: "", email: "", org: "", role: "", goal: "", notes: "" });setOpenModal(true);};
+    window.addEventListener("open-demo", handler);
+    return () => window.removeEventListener("open-demo", handler);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {if (e.key === "Escape") setOpenModal(false);};
+    if (open) {
+      document.addEventListener("keydown", onKey);
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {document.removeEventListener("keydown", onKey);document.body.style.overflow = prev;};
+    }
+  }, [open]);
+
+  if (!open) return null;
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+  const fieldCls = "w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-slate-400 focus:outline-none focus:border-teal2 focus:ring-2 focus:ring-teal3/25 transition";
+  const labelCls = "block text-xs font-bold text-ink uppercase tracking-wide mb-1.5";
+
+  const submit = (e) => {
+    e.preventDefault();
+    const errs = {};
+    if (!form.name.trim()) errs.name = "Please enter your name.";
+    if (!form.email.trim()) errs.email = "Work email is required.";else
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) errs.email = "Enter a valid email address.";
+    setErrors(errs);
+    if (Object.keys(errs).length) return;
+    try {
+      const leads = JSON.parse(localStorage.getItem("mriq_demo_leads") || "[]");
+      leads.push({ ...form, ts: new Date().toISOString() });
+      localStorage.setItem("mriq_demo_leads", JSON.stringify(leads));
+    } catch (err) {/* prototype: ignore storage failures */}
+    setSent(true);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Request a demo">
+      <div className="absolute inset-0 bg-ink/70 backdrop-blur-sm" onClick={() => setOpenModal(false)} />
+      <div className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl shadow-black/40 overflow-hidden flex flex-col md:flex-row max-h-[92vh]">
+        <button onClick={() => setOpenModal(false)} aria-label="Close" className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full flex items-center justify-center bg-white/90 border border-slate-200 text-slate-500 shadow-sm hover:text-ink hover:bg-white transition">
+          <Icon name="x" size={18} strokeWidth={2.5} />
+        </button>
+
+        <div className="md:w-2/5 shrink-0 p-7 lg:p-8 text-white relative overflow-hidden" style={{ backgroundColor: "#0d8a8a" }}>
+          <div className="absolute -top-24 -right-20 w-72 h-72 hero-glow rounded-full pointer-events-none" />
+          <div className="absolute inset-0 grid-texture opacity-20 pointer-events-none" />
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/25 text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold pulse-dot" /> 30-minute walkthrough
+            </div>
+            <h2 className="font-display font-extrabold text-2xl leading-tight mb-3 tracking-tight">See your CME audience the way we see it.</h2>
+            <p className="text-white/75 text-sm leading-relaxed mb-6">Tell us a little about your program and we'll tailor the demo to your specialty mix.</p>
+            <div className="text-[11px] font-bold text-white/60 uppercase tracking-widest mb-3">What you'll get</div>
+            <ul className="space-y-2.5 text-sm text-white/85">
+              {DEMO_BENEFITS.map((b, i) =>
+              <li key={i} className="flex gap-2.5"><span className="text-gold mt-0.5 shrink-0"><Icon name="check-circle-2" size={15} /></span>{b}</li>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex-1 min-h-0 p-7 lg:p-8 overflow-y-auto">
+          {sent ?
+          <div className="h-full flex flex-col items-center justify-center text-center py-8">
+            <div className="w-14 h-14 rounded-full bg-teal3/15 flex items-center justify-center text-teal1 mb-5"><Icon name="check" size={28} strokeWidth={2.5} /></div>
+            <h3 className="font-display font-extrabold text-2xl text-ink mb-2">Thanks, {form.name.trim().split(/\s+/).filter((w) => !/^(dr|mr|mrs|ms|prof|mx)\.?$/i.test(w))[0] || "there"}!</h3>
+            <p className="text-slate-500 text-sm max-w-xs leading-relaxed mb-7">Your request is in. A specialist will reach out at <span className="font-semibold text-ink">{form.email}</span> within one business day to schedule your demo.</p>
+            <button onClick={() => setOpenModal(false)} className="px-6 py-3 bg-gradient-to-br from-teal1 to-teal2 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition lift">Close</button>
+          </div> :
+          <form onSubmit={submit} noValidate>
+            <h3 className="font-display font-extrabold text-xl text-ink mb-1">Request a demo</h3>
+            <p className="text-slate-500 text-sm mb-5">No obligation. We'll never sell your data.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label className="block">
+                <span className={labelCls}>Full name<span className="text-teal1"> *</span></span>
+                <input className={fieldCls} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Dr. Jane Smith" />
+                {errors.name && <span className="block text-[12px] text-rose-500 mt-1">{errors.name}</span>}
+              </label>
+              <label className="block">
+                <span className={labelCls}>Work email<span className="text-teal1"> *</span></span>
+                <input type="email" className={fieldCls} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="jane@institution.org" />
+                {errors.email && <span className="block text-[12px] text-rose-500 mt-1">{errors.email}</span>}
+              </label>
+              <label className="block">
+                <span className={labelCls}>Organization</span>
+                <input className={fieldCls} value={form.org} onChange={(e) => set("org", e.target.value)} placeholder="Accredited CME provider" />
+              </label>
+              <label className="block">
+                <span className={labelCls}>Your role</span>
+                <select className={fieldCls} value={form.role} onChange={(e) => set("role", e.target.value)}>
+                  <option value="">Select one…</option>
+                  <option>CME / CE Director</option>
+                  <option>Marketing Lead</option>
+                  <option>Accreditation Manager</option>
+                  <option>Medical Education</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </div>
+            <div className="mt-4">
+              <label className="block">
+                <span className={labelCls}>What's your main goal?</span>
+                <select className={fieldCls} value={form.goal} onChange={(e) => set("goal", e.target.value)}>
+                  <option value="">Select one…</option>
+                  <option>Fill live &amp; virtual CME seats</option>
+                  <option>Improve lead-to-enrollment rate</option>
+                  <option>Reach a specific specialty audience</option>
+                  <option>Multi-channel outreach &amp; nurture</option>
+                  <option>Compliance-safe physician marketing</option>
+                </select>
+              </label>
+            </div>
+            <div className="mt-4">
+              <label className="block">
+                <span className={labelCls}>Anything specific? <span className="text-slate-400 font-medium normal-case tracking-normal">(optional)</span></span>
+                <textarea rows="3" className={fieldCls + " resize-none"} value={form.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Therapeutic area, program types, timing…" />
+              </label>
+            </div>
+            <button type="submit" className="w-full mt-5 px-6 py-3.5 bg-gradient-to-br from-gold2 to-gold text-ink font-bold rounded-lg shadow-md hover:shadow-lg transition lift flex items-center justify-center gap-2">
+              Request my demo <Icon name="arrow-right" size={18} strokeWidth={2.5} />
+            </button>
+            <p className="text-[11px] text-slate-400 text-center mt-3 flex items-center justify-center gap-1.5"><Icon name="lock" size={12} /> HIPAA-aware. Your details stay private.</p>
+          </form>
+          }
+        </div>
+      </div>
+    </div>);
+
 }
 
 function App() {
@@ -1306,6 +1458,7 @@ function App() {
       {/* <CaseStudies /> merged into the Healthcare Marketing Intelligence Hub */}
       <CTA />
       <Footer />
+      <DemoModal />
 
       <TweaksPanel>
         <TweakSection label="Typography" />

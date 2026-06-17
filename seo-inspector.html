@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SEO Inspector · MedReachIQ</title>
+<title>SEO Inspector · CMEIntent</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -194,15 +194,87 @@
   .hidden { display: none !important; }
   #sandbox { position: fixed; width: 1280px; height: 900px; left: -9999px; top: 0; border: 0; }
   .footnote { text-align: center; color: var(--muted); font-size: 12px; margin: 30px 0 10px; }
+
+  /* ---------- Login gate ---------- */
+  .gate {
+    position: fixed; inset: 0; z-index: 100;
+    background: linear-gradient(150deg, var(--ink), var(--ink2));
+    display: grid; place-items: center; padding: 24px;
+  }
+  .gate-card {
+    width: 100%; max-width: 384px;
+    background: var(--card); border-radius: 18px;
+    box-shadow: 0 30px 80px -30px rgba(0,0,0,0.55);
+    padding: 34px 32px 30px;
+  }
+  .gate-mark {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--teal1), var(--teal2));
+    display: grid; place-items: center;
+    font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 24px; color: #fff;
+    margin-bottom: 18px;
+  }
+  .gate-card h2 { font-family: 'Plus Jakarta Sans'; font-size: 21px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .gate-card .gate-sub { font-size: 13px; color: var(--muted); margin: 0 0 24px; line-height: 1.5; }
+  .gate-field { margin-bottom: 14px; }
+  .gate-field label { display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .gate-field input {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+    padding: 11px 13px; border: 1px solid var(--line); border-radius: 9px;
+    background: #F8FAFC; transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .gate-field input:focus {
+    outline: none; border-color: var(--teal2);
+    box-shadow: 0 0 0 3px rgba(22,179,179,0.15); background: #fff;
+  }
+  .gate-btn {
+    width: 100%; font-family: inherit; font-weight: 700; font-size: 14px;
+    border: none; cursor: pointer; border-radius: 9px;
+    padding: 12px 16px; margin-top: 6px;
+    background: linear-gradient(135deg, var(--teal1), var(--teal2)); color: #fff;
+    transition: filter .15s ease, transform .1s ease;
+  }
+  .gate-btn:hover { filter: brightness(1.07); }
+  .gate-btn:active { transform: translateY(1px); }
+  .gate-err {
+    font-size: 12.5px; color: var(--fail); font-weight: 600;
+    margin: 0 0 14px; padding: 9px 12px; border-radius: 8px;
+    background: var(--failbg); display: none; align-items: center; gap: 7px;
+  }
+  .gate-err.show { display: flex; }
+  .gate-note { font-size: 11px; color: var(--muted); margin: 16px 0 0; text-align: center; line-height: 1.5; }
+  body.locked { overflow: hidden; }
 </style>
 </head>
-<body>
+<body class="locked">
+  <div class="gate" id="gate">
+    <form class="gate-card" id="gateForm" autocomplete="on">
+      <div class="gate-mark">M</div>
+      <h2 class="display">Sign in to continue</h2>
+      <p class="gate-sub">The SEO Inspector is a restricted internal tool. Enter your credentials to access the audit.</p>
+      <div class="gate-err" id="gateErr">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span>Incorrect email or password. Please try again.</span>
+      </div>
+      <div class="gate-field">
+        <label for="gateEmail">Email</label>
+        <input type="email" id="gateEmail" name="email" placeholder="you@company.com" autocomplete="username" required />
+      </div>
+      <div class="gate-field">
+        <label for="gatePass">Password</label>
+        <input type="password" id="gatePass" name="password" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="gate-btn">Sign in &amp; run audit</button>
+      <p class="gate-note">Authorized personnel only.</p>
+    </form>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <div class="mark">M</div>
       <div>
         <h1 class="display">SEO Inspector</h1>
-        <div class="sub">MedReachIQ · on-page audit</div>
+        <div class="sub">CMEIntent · on-page audit</div>
       </div>
       <div class="spacer"></div>
       <div class="scan-meta" id="scanMeta">Reads the rendered DOM of every page</div>
@@ -241,10 +313,10 @@
 ---------------------------------------------------------------------- */
 const PAGES = [
   { path: 'index.html',                            label: 'Home' },
-  { path: 'solution-audience-intelligence.html',   label: 'CME Audience Intelligence' },
-  { path: 'solution-cme-targeting.html',           label: 'HCP Outreach' },
-  { path: 'solution-multichannel-marketing.html',  label: 'Alumni Growth Engine' },
-  { path: 'solution-nursing.html',                 label: 'Nurse Audience Intelligence' },
+  { path: 'solutions/cme-audience-intelligence.html',   label: 'CME Audience Intelligence' },
+  { path: 'solutions/hcp-outreach.html',           label: 'HCP Outreach' },
+  { path: 'solutions/alumni-outreach.html',  label: 'Alumni Growth Engine' },
+  { path: 'solutions/nurse-audience-intelligence.html',                 label: 'Nurse Audience Intelligence' },
   { path: 'use-cases.html',                        label: 'Use Cases' },
   { path: 'personas.html',                         label: 'Personas & Intent' },
   { path: 'how-it-works.html',                     label: 'How It Works' },
@@ -508,7 +580,43 @@ async function runScan() {
 
 $('#rescan').addEventListener('click', runScan);
 $('#onlyIssues').addEventListener('change', renderRows);
-runScan();
+
+/* ---------- Login gate ----------
+   Front-end gate for this prototype. The unlock survives a page REFRESH,
+   but any fresh navigation to this page (leaving and coming back, or a new
+   tab) re-prompts for credentials. */
+const AUTH = { email: 'deep@lakeb2b.com', password: 'Champ@123' };
+const AUTH_KEY = 'sei_authed';
+
+function unlock() {
+  $('#gate').remove();
+  document.body.classList.remove('locked');
+  runScan();
+}
+
+// Only a reload keeps you signed in; a fresh navigate/back-forward re-prompts.
+const navType = (performance.getEntriesByType('navigation')[0] || {}).type;
+const stillAuthed = navType === 'reload' && sessionStorage.getItem(AUTH_KEY) === '1';
+if (!stillAuthed) sessionStorage.removeItem(AUTH_KEY);
+
+if (stillAuthed) {
+  unlock();
+} else {
+  $('#gateForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = $('#gateEmail').value.trim().toLowerCase();
+    const pass = $('#gatePass').value;
+    if (email === AUTH.email.toLowerCase() && pass === AUTH.password) {
+      sessionStorage.setItem(AUTH_KEY, '1');
+      unlock();
+    } else {
+      $('#gateErr').classList.add('show');
+      $('#gatePass').value = '';
+      $('#gatePass').focus();
+    }
+  });
+  $('#gateEmail').focus();
+}
 </script>
 </body>
 </html>

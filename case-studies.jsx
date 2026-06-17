@@ -2,56 +2,94 @@ const { useState, useEffect, useRef } = React;
 const { Icon, Nav, Footer } = window;
 
 /* ----------------------------- Case study data ------------------------ */
-const FEATURED = {
-  href: "#",
-  client: "National CME Provider",
-  title: "How a national CME provider doubled qualified enrollments",
-  excerpt: "By layering intent signals over verified NPI data, a leading accredited provider rebuilt its targeting around in-market clinicians, growing completed activities 2.1× in two quarters without expanding spend.",
-  meta: "May 2026 · 6 min read" };
-
-
 const CASES = [
 {
+  href: "case-studies/cme-lead-generation.html",
+  client: "Accredited CME Provider",
+  title: "CME lead generation services that tripled qualified enrollments",
+  excerpt: "Healthcare lead generation built on healthcare intent data and HCP behavioral data turned a flat funnel into a steady flow of healthcare marketing leads. The CME lead generation services behind it drove continuing medical education marketing that actually converted.",
+  meta: "CME Provider · 6 min read",
+  dark: false },
+
+{
+  href: "case-studies/medical-professional-database.html",
   client: "Multi-Specialty Society",
-  title: "94% inbox placement for a multi-specialty CME launch",
-  excerpt: "Verification, NCOA validation, and sender-authentication hygiene took a stalled invitation program to 94%+ inbox placement, putting accredited activities back in front of clinicians.",
-  meta: "Medical Society · 5 min read",
-  dark: false },
-
-{
-  client: "Specialty Board",
-  title: "Filling MOC renewal cohorts ahead of the deadline",
-  excerpt: "Timing outreach to recertification windows turned a quiet enrollment quarter into fully-subscribed cohorts, with same-week sign-ups from physicians inside their MOC cycle.",
-  meta: "Board / MOC · 6 min read",
+  title: "Rebuilding outreach on a verified medical professional database",
+  excerpt: "Replacing a stale list with a verified medical professional database gave the society one clinician database and medical specialty database to plan against. The refreshed healthcare contact database and healthcare professional database supplied the physician targeting data behind precise HCP targeting.",
+  meta: "Medical Society · 6 min read",
   dark: true },
 
 {
-  client: "Integrated Health System",
-  title: "Account-based CME across an integrated health system",
-  excerpt: "Targeting every eligible physician and APP within a hospital system concurrently lifted system-wide participation and gave the education team one defensible audience to plan against.",
-  meta: "Health System · 7 min read",
-  dark: false },
-
-{
-  client: "Nursing CE Provider",
-  title: "Reviving a stalled nursing CE audience",
-  excerpt: "A refreshed, verified nurse audience and intent-based segmentation re-engaged lapsed learners and rebuilt a predictable pipeline of completed continuing-education activities.",
-  meta: "Nursing CE · 5 min read",
-  dark: true },
-
-{
-  client: "Medical Communications",
-  title: "Proving campaign ROI on a grant-funded program",
-  excerpt: "Multi-touch attribution tied every completion back to its originating asset, letting the team show funders exactly which channels drove accredited activity, and where to reinvest.",
-  meta: "Med Comms · 6 min read",
-  dark: false },
-
-{
+  href: "case-studies/audience-segmentation.html",
   client: "Medical Conference Series",
-  title: "Scaling alumni re-engagement for a conference series",
-  excerpt: "An alumni growth engine re-activated past attendees with personalized, intent-aware outreach, lifting early-bird registration and shortening the path to a sold-out room.",
-  meta: "Medical Conference · 5 min read",
-  dark: true }];
+  title: "Healthcare audience segmentation that filled a medical conference",
+  excerpt: "Healthcare audience segmentation and HCP audience targeting, sharpened by CME intent data intelligence and healthcare audience insights, powered the medical conference marketing and CME marketing that filled the room ahead of the early-bird deadline.",
+  meta: "Medical Conference · 6 min read",
+  dark: false },
+
+{
+  href: "case-studies/cme-audience-segment-specialty-society.html",
+  client: "National Specialty Society",
+  title: "How a national specialty society built a 40,000-physician CME segment in 48 hours",
+  excerpt: "A large but undifferentiated member file became a precise, in-market audience once verified specialty data met live intent signals, producing a 40,000-physician segment ready to activate in two days.",
+  meta: "Specialty Society · 3 min read",
+  dark: true },
+
+{
+  href: "case-studies/grand-rounds-intent-data.html",
+  client: "Academic Medical Center",
+  title: "Academic medical center used intent data to refill grand rounds attendance",
+  excerpt: "Declining grand rounds attendance turned around when the program used intent data and geographic targeting to reach external physicians across its service area.",
+  meta: "Academic Medical Center · 3 min read",
+  dark: false },
+
+{
+  href: "case-studies/compliant-prescriber-outreach.html",
+  client: "Specialty Pharma Team",
+  title: "Specialty pharma team reached 18,000 in-market prescribers with zero compliance flags",
+  excerpt: "Building targeting on verified professional records and behavior, never on protected health information, let the team hit reach and compliance goals at the same time.",
+  meta: "Specialty Pharma · 3 min read",
+  dark: false },
+
+{
+  href: "case-studies/intent-targeted-outreach-efficiency.html",
+  client: "Medical Society",
+  title: "Medical society used intent signals to cut outreach volume 40% while lifting response",
+  excerpt: "More email was producing less response. Sending only to clinicians showing real in-market behavior shrank volume and grew results at once.",
+  meta: "Medical Society · 3 min read",
+  dark: true },
+
+{
+  href: "case-studies/cme-alumni-reactivation.html",
+  client: "Academic CME Office",
+  title: "Academic CME office reactivated 38% of lapsed alumni in a single semester",
+  excerpt: "A structured reactivation built on refreshed contact data and renewal-window timing brought more than a third of dormant past learners back in one semester.",
+  meta: "Academic CME Office · 3 min read",
+  dark: false },
+
+{
+  href: "case-studies/alumni-recurring-revenue.html",
+  client: "Specialty Society",
+  title: "Specialty society turned past attendees into a recurring revenue stream",
+  excerpt: "Cohort nurture and intent-triggered offers turned one-off event attendees into a dependable, repeating enrollment pipeline.",
+  meta: "Specialty Society · 3 min read",
+  dark: true },
+
+{
+  href: "case-studies/nursing-ce-rn-enrollment.html",
+  client: "Nursing CE Provider",
+  title: "Nursing CE provider tripled RN enrollment by targeting active renewal windows",
+  excerpt: "License-verified nurse data and state-by-state renewal targeting tripled RN enrollment where generic lists and mistimed outreach had stalled.",
+  meta: "Nursing CE Provider · 3 min read",
+  dark: false },
+
+{
+  href: "case-studies/aprn-license-segmentation.html",
+  client: "APRN Certification Body",
+  title: "APRN certification body filled specialty cohorts using license-level segmentation",
+  excerpt: "License-level segmentation across NP, CNS, CRNA, and CNM populations turned chronically under-filled specialty cohorts into full ones.",
+  meta: "APRN Certification Body · 3 min read",
+  dark: false }];
 
 
 /* ------------------------------- Hero ---------------------------------- */
@@ -80,44 +118,11 @@ function CaseHero() {
     </header>);
 }
 
-/* --------------------------- Featured case ----------------------------- */
-function FeaturedCase() {
-  return (
-    <div className="group grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] items-center max-w-7xl mx-auto mt-16 mb-14 rounded-3xl border border-slate-200 overflow-hidden bg-white shadow-sm hover:shadow-xl transition lift">
-      {/* Lead image on the LEFT, inset with left spacing — drag or click to upload */}
-      <div className="pl-6 lg:pl-10">
-        <image-slot
-          id="case-featured-lead"
-          shape="rect"
-          fit="cover"
-          placeholder="Drop or click to upload the lead image"
-          style={{ display: "block", width: "100%", height: "auto", aspectRatio: "1200 / 520" }}>
-        </image-slot>
-      </div>
-      {/* Body */}
-      <a href={FEATURED.href} className="flex flex-col justify-center gap-4 p-8 lg:p-12">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold text-teal1 uppercase tracking-[0.2em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal1 pulse-dot" /> Featured
-          </span>
-          <span className="text-slate-300">·</span>
-          <span className="text-[11px] font-bold text-teal1 uppercase tracking-widest">{FEATURED.client}</span>
-        </div>
-        <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-cshead tracking-tight leading-tight group-hover:text-teal1 transition text-balance">{FEATURED.title}</h2>
-        <p className="text-[15px] leading-relaxed" style={{ color: "rgb(6, 30, 63)" }}>{FEATURED.excerpt}</p>
-        <div className="flex items-center justify-between gap-4 mt-2">
-          <span className="text-xs font-semibold text-slate-400 tracking-wide tabular-nums">{FEATURED.meta}</span>
-          <span className="inline-flex items-center gap-1.5 text-sm font-bold text-teal1 group-hover:gap-2.5 transition-all">Read case study <Icon name="arrow-right" size={16} strokeWidth={2.5} /></span>
-        </div>
-      </a>
-    </div>);
-}
-
 /* ----------------------------- Case card ------------------------------- */
 function CaseCard({ c }) {
   const dark = c.dark;
   return (
-    <a href="#" className={`group flex flex-col rounded-2xl border overflow-hidden transition lift shadow-sm hover:shadow-lg ${
+    <a href={c.href || "#"} className={`group flex flex-col rounded-2xl border overflow-hidden transition lift shadow-sm hover:shadow-lg ${
     dark ? "bg-csteal border-csteal2 hover:border-teal3" : "bg-white border-slate-200 hover:border-teal2"}`}>
       {/* Body */}
       <div className="p-7 flex flex-col gap-2.5 flex-1">
@@ -179,13 +184,12 @@ function CaseCTA() {
 /* ------------------------------- Page ---------------------------------- */
 function CaseStudiesPage() {
   useEffect(() => {
-    document.title = "Case Studies | MedReachIQ";
+    document.title = "CME Marketing Case Studies & Results | CMEIntent";
   }, []);
   return (
     <div className="bg-white text-ink font-sans antialiased selection:bg-teal2 selection:text-white">
       <Nav />
       <CaseHero />
-      <FeaturedCase />
       <CaseGrid />
       <CaseCTA />
       <Footer />
