@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study: Verified Medical Professional Database | CMEIntent</title>
+<meta name="description" content="How a multi-specialty society rebuilt outreach on a verified medical professional database, clinician database, and medical specialty database to power precise HCP targeting." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          ink:   '#0B1F3A',
+          ink2:  '#132D52',
+          teal1: '#0D8A8A',
+          teal2: '#16B3B3',
+          teal3: '#1DCFCF',
+          gold:  '#FFD166',
+          gold2: '#F0A500',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { font-size: 19px; scroll-behavior: smooth; }
+  html, body { font-family: 'DM Sans', system-ui, sans-serif; }
+  .font-display { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  .hero-glow {
+    background: radial-gradient(closest-side, rgba(13,138,138,0.35), rgba(13,138,138,0) 70%);
+  }
+  .grid-texture {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  [data-lucide] { width: 1em; height: 1em; }
+  .lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .lift:hover { transform: translateY(-3px); }
+  @keyframes softPulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .pulse-dot { animation: softPulse 1.8s ease-in-out infinite; }
+
+  /* ===== Article body ===== */
+  .post-body > * + * { margin-top: 24px; }
+  .post-body p { font-size: 18px; line-height: 1.72; color: #2b3f5c; text-wrap: pretty; }
+  .post-body .lead-para { font-size: 21px; line-height: 1.6; color: #0B1F3A; font-weight: 500; }
+  .post-body h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 800; letter-spacing: -.02em; line-height: 1.14; color: #0B1F3A; margin-top: 48px;
+  }
+  .post-body h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;
+    letter-spacing: -.01em; color: #0B1F3A; margin-top: 34px;
+  }
+  .post-body ul { padding-left: 4px; display: flex; flex-direction: column; gap: 13px; list-style: none; }
+  .post-body li { font-size: 18px; line-height: 1.6; color: #2b3f5c; padding-left: 30px; position: relative; }
+  .post-body li::before {
+    content: ""; position: absolute; left: 4px; top: 12px;
+    width: 8px; height: 8px; border-radius: 999px; background: #0D8A8A;
+  }
+  .post-body strong { color: #0B1F3A; font-weight: 700; }
+
+  /* keyword highlights */
+  .kw-primary {
+    background: #0D8A8A; color: #fff;
+    padding: .04em .36em; border-radius: 5px; font-weight: 600;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .kw {
+    background: linear-gradient(transparent 58%, rgba(29,207,207,.42) 58%);
+    padding: 0 .04em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  /* keyword links */
+  a.kw-primary, a.kw { cursor: pointer; transition: filter .15s ease, box-shadow .15s ease, background .15s ease; }
+  a.kw-primary { text-decoration: none; }
+  a.kw-primary:hover { filter: brightness(1.07); box-shadow: 0 2px 10px rgba(13,138,138,.4); }
+  a.kw { color: inherit; text-decoration: none; }
+  a.kw:hover { background: linear-gradient(transparent 50%, rgba(29,207,207,.62) 50%); }
+
+  .pullquote {
+    border-left: 3px solid #16B3B3; padding: 4px 0 4px 26px; margin: 40px 0;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(21px, 2.4vw, 28px);
+    font-weight: 600; letter-spacing: -.02em; line-height: 1.3; color: #0B1F3A; text-wrap: pretty;
+  }
+  .post-inline figcaption { text-align: left; }
+
+  /* user-fillable image slots — make the empty drop zone clearly visible on white */
+  image-slot::part(frame) { background: #EAF3F4; }
+  image-slot::part(ring) { border: 1.6px dashed rgba(13,138,138,.45); }
+  image-slot:hover::part(frame) { background: #E0EEF0; }
+</style>
+</head>
+<body class="bg-white text-ink antialiased selection:bg-teal2 selection:text-white">
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="../image-slot.js"></script>
+
+  <script type="text/babel" src="../blog-shared.jsx"></script>
+  <script type="text/babel" src="../case-medical-professional-database.jsx"></script>
+
+  <script>
+  /* Path fixer: this page lives one folder deep, so prefix inter-page links with ../ */
+  (function(){
+    var BASE = "../";
+    function skip(h){
+      return !h || h.charAt(0)==='#' || h.charAt(0)==='/' ||
+        h.indexOf('http')===0 || h.indexOf('mailto:')===0 ||
+        h.indexOf('tel:')===0 || h.indexOf('../')===0;
+    }
+    function fix(){
+      var as = document.querySelectorAll('a[href]');
+      for (var i=0;i<as.length;i++){
+        var h = as[i].getAttribute('href');
+        if (skip(h)) continue;
+        as[i].setAttribute('href', BASE + h);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      fix();
+      var root = document.getElementById('root') || document.body;
+      new MutationObserver(fix).observe(root, { childList:true, subtree:true });
+    });
+  })();
+  </script>
+</body>
+</html>
