@@ -29,10 +29,10 @@ function Icon({ name, size = 18, className = "", strokeWidth = 2 }) {
 function Nav() {
   const [open, setOpen] = useState(false);
   const SOLUTION_LINKS = [
-  { href: "solutions/cme-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
-  { href: "solutions/hcp-outreach.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
-  { href: "solutions/alumni-outreach.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
-  { href: "solutions/nurse-audience-intelligence.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }];
+  { href: "solution-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
+  { href: "solution-cme-targeting.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
+  { href: "solution-multichannel-marketing.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
+  { href: "solution-nursing.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }];
 
   const PROCESS_LINKS = [
   { href: "use-cases.html", label: "Use Cases" },
@@ -191,10 +191,10 @@ function Footer() {
             </div>
           </div>
           {col("Solutions", [
-          { label: "CME Audience Intelligence", href: "solutions/cme-audience-intelligence.html" },
-          { label: "HCP Outreach", href: "solutions/hcp-outreach.html" },
-          { label: "Alumni Growth Engine", href: "solutions/alumni-outreach.html" },
-          { label: "Nurse Audience Intelligence", href: "solutions/nurse-audience-intelligence.html" }]
+          { label: "CME Audience Intelligence", href: "solution-audience-intelligence.html" },
+          { label: "HCP Outreach", href: "solution-cme-targeting.html" },
+          { label: "Alumni Growth Engine", href: "solution-multichannel-marketing.html" },
+          { label: "Nurse Audience Intelligence", href: "solution-nursing.html" }]
           )}
           {col("Process", [
           { label: "Use Cases", href: "use-cases.html" },

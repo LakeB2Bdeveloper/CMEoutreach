@@ -184,10 +184,10 @@ function Nav() {
             <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
               <div className="bg-ink border border-white/10 rounded-xl shadow-2xl shadow-black/50 w-72 p-2">
                 {[
-                { href: "solutions/cme-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
-                { href: "solutions/hcp-outreach.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
-                { href: "solutions/alumni-outreach.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
-                { href: "solutions/nurse-audience-intelligence.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }].
+                { href: "solution-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
+                { href: "solution-cme-targeting.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
+                { href: "solution-multichannel-marketing.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
+                { href: "solution-nursing.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }].
                 map((s, i) =>
                 <a key={i} href={s.href} className="flex gap-3 items-start p-3 rounded-lg hover:bg-white/5 transition">
                     <span className="font-display font-extrabold text-teal3 text-sm leading-tight pt-0.5">{s.num}</span>
@@ -261,10 +261,10 @@ function Nav() {
 
       {open && <div className="md:hidden bg-ink border-b border-white/10 px-6 py-4 flex flex-col gap-3">
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Solutions</div>
-          <a href="solutions/cme-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">01 · CME Audience Intelligence</a>
-          <a href="solutions/hcp-outreach.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">02 · HCP Outreach</a>
-          <a href="solutions/alumni-outreach.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">03 · Alumni Growth Engine</a>
-          <a href="solutions/nurse-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">04 · Nurse Audience Intelligence</a>
+          <a href="solution-audience-intelligence.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">01 · CME Audience Intelligence</a>
+          <a href="solution-cme-targeting.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">02 · HCP Outreach</a>
+          <a href="solution-multichannel-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">03 · Alumni Growth Engine</a>
+          <a href="solution-nursing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">04 · Nurse Audience Intelligence</a>
           <div className="h-px bg-white/10 my-1" />
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Services</div>
           <a href="services/cme-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Marketing Services</a>
@@ -608,7 +608,7 @@ function PersonasStrip() {
 const solutions = [
 {
   num: "01",
-  slug: "solutions/cme-audience-intelligence.html",
+  slug: "solution-audience-intelligence.html",
   kicker: "CME",
   title: "CME Audience Intelligence",
   focus: "Targeted CME campaigns that drive registrations and participation",
@@ -626,7 +626,7 @@ const solutions = [
 },
 {
   num: "02",
-  slug: "solutions/hcp-outreach.html",
+  slug: "solution-cme-targeting.html",
   kicker: "Outreach",
   title: "HCP Outreach",
   focus: "Niche audience intelligence powered by intent and specialty signals",
@@ -642,7 +642,7 @@ const solutions = [
 },
 {
   num: "03",
-  slug: "solutions/alumni-outreach.html",
+  slug: "solution-multichannel-marketing.html",
   kicker: "Alumni",
   title: "Alumni Growth Engine",
   focus: "Turn alumni relationships into new revenue and growth",
@@ -659,7 +659,7 @@ const solutions = [
 },
 {
   num: "04",
-  slug: "solutions/nurse-audience-intelligence.html",
+  slug: "solution-nursing.html",
   kicker: "Nursing",
   title: "Nurse Audience Intelligence",
   focus: "Reach the full nursing workforce, from CNAs to APRNs",

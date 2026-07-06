@@ -21,10 +21,10 @@ function Icon({ name, size = 18, className = "", strokeWidth = 2 }) {
 function Nav({ currentSlug }) {
   const [open, setOpen] = useState(false);
   const SOLUTION_LINKS = [
-  { href: "solutions/cme-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
-  { href: "solutions/hcp-outreach.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
-  { href: "solutions/alumni-outreach.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
-  { href: "solutions/nurse-audience-intelligence.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }];
+  { href: "solution-audience-intelligence.html", num: "01", title: "CME Audience Intelligence", kicker: "Core Platform" },
+  { href: "solution-cme-targeting.html", num: "02", title: "HCP Outreach", kicker: "Outreach" },
+  { href: "solution-multichannel-marketing.html", num: "03", title: "Alumni Growth Engine", kicker: "Alumni" },
+  { href: "solution-nursing.html", num: "04", title: "Nurse Audience Intelligence", kicker: "Nursing" }];
 
 
   return (
@@ -179,10 +179,10 @@ function Footer() {
             </div>
           </div>
           {col("Solutions", [
-          { label: "CME Audience Intelligence", href: "solutions/cme-audience-intelligence.html" },
-          { label: "HCP Outreach", href: "solutions/hcp-outreach.html" },
-          { label: "Alumni Growth Engine", href: "solutions/alumni-outreach.html" },
-          { label: "Nurse Audience Intelligence", href: "solutions/nurse-audience-intelligence.html" }]
+          { label: "CME Audience Intelligence", href: "solution-audience-intelligence.html" },
+          { label: "HCP Outreach", href: "solution-cme-targeting.html" },
+          { label: "Alumni Growth Engine", href: "solution-multichannel-marketing.html" },
+          { label: "Nurse Audience Intelligence", href: "solution-nursing.html" }]
           )}
           {col("Services", [{ label: "CME Marketing Services", href: "services/cme-marketing.html" }, { label: "MOC Marketing Services", href: "services/maintenance-of-certification-marketing.html" }, { label: "CME Lead Generation Services", href: "services/lead-generation.html" }])}
           {col("Company", ["About", "Careers", { label: "Contact", href: "contact.html" }])}
@@ -272,7 +272,7 @@ const SOLUTIONS = {
     { icon: "baby", title: "Pediatricians", tag: "Pediatrics", keyword: "Pediatrics physician contacts", text: "Pediatrics physician contacts spanning general and subspecialty pediatric practice." },
     { icon: "heart-pulse", title: "Primary Care", tag: "FM · IM · Peds", keyword: "Primary care physician contacts", text: "Primary care physician contacts spanning family medicine, internal medicine, and pediatrics for high-reach CME programs." },
     { icon: "user-plus", title: "Physician Assistants", tag: "PA-C", keyword: "Physician assistant database", text: "A physician assistant database covering certified PAs by specialty and setting, ideal for interprofessional CME." },
-    { icon: "heart-handshake", title: "Nurses & Allied Clinicians", tag: "RN · LPN · CNA", keyword: "Clinician database", text: "A clinician database reaching the full nursing and allied-health workforce. Explore our dedicated nurse audience intelligence.", href: "solutions/nurse-audience-intelligence.html" },
+    { icon: "heart-handshake", title: "Nurses & Allied Clinicians", tag: "RN · LPN · CNA", keyword: "Clinician database", text: "A clinician database reaching the full nursing and allied-health workforce. Explore our dedicated nurse audience intelligence.", href: "solution-nursing.html" },
     { icon: "pill", title: "Pharmacists", tag: "PharmD · RPh", keyword: "Pharmacist contacts", text: "Retail, hospital, and clinical pharmacist contacts for pharmacology CE and medication-focused education." },
     { icon: "smile", title: "Dentists", tag: "DDS · DMD", keyword: "Dental professional contacts", text: "Verified dental professional contacts across general and specialty practice for dental continuing education." },
     { icon: "briefcase", title: "Healthcare Executives", tag: "C-suite · Admin", keyword: "Healthcare executive database", text: "A healthcare executive database of decision-makers, including CMOs, CNOs, and administrators, for leadership and enterprise programs." },
@@ -781,10 +781,10 @@ function RelatedCaseStudies({ data }) {
 function CrossSell({ data }) {
   const others = ORDER.filter((s) => s !== data.slug).map((s) => SOLUTIONS[s]);
   const slugToFile = {
-    "audience-intelligence": "solutions/cme-audience-intelligence.html",
-    "cme-targeting": "solutions/hcp-outreach.html",
-    "multichannel-marketing": "solutions/alumni-outreach.html",
-    "nursing": "solutions/nurse-audience-intelligence.html"
+    "audience-intelligence": "solution-audience-intelligence.html",
+    "cme-targeting": "solution-cme-targeting.html",
+    "multichannel-marketing": "solution-multichannel-marketing.html",
+    "nursing": "solution-nursing.html"
   };
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
