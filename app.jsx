@@ -201,14 +201,14 @@ function Nav() {
             </div>
           </li>
           <li className="relative group">
-            <a href="services/cme-marketing.html" className="hover:text-teal3 transition inline-flex items-center gap-1">
+            <a href="cme-marketing.html" className="hover:text-teal3 transition inline-flex items-center gap-1">
               Services <Icon name="chevron-down" size={14} />
             </a>
             <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
               <div className="bg-ink border border-white/10 rounded-xl shadow-2xl shadow-black/50 w-64 p-2">
-                <a href="services/cme-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Marketing Services</a>
-                <a href="services/maintenance-of-certification-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">MOC Marketing Services</a>
-                <a href="services/lead-generation.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Lead Generation Services</a>
+                <a href="cme-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Marketing Services</a>
+                <a href="maintenance-of-certification-marketing.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">MOC Marketing Services</a>
+                <a href="lead-generation.html" className="block px-3 py-2 rounded-lg text-white/85 text-sm font-medium hover:bg-white/5 hover:text-teal3 transition">CME Lead Generation Services</a>
               </div>
             </div>
           </li>
@@ -267,9 +267,9 @@ function Nav() {
           <a href="solution-nursing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">04 · Nurse Audience Intelligence</a>
           <div className="h-px bg-white/10 my-1" />
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Services</div>
-          <a href="services/cme-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Marketing Services</a>
-          <a href="services/maintenance-of-certification-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">MOC Marketing Services</a>
-          <a href="services/lead-generation.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Lead Generation Services</a>
+          <a href="cme-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Marketing Services</a>
+          <a href="maintenance-of-certification-marketing.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">MOC Marketing Services</a>
+          <a href="lead-generation.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">CME Lead Generation Services</a>
           <div className="h-px bg-white/10 my-1" />
           <div className="text-white/45 text-[10px] font-bold uppercase tracking-widest pt-1">Process</div>
           <a href="use-cases.html" onClick={() => setOpen(false)} className="text-white/80 text-sm py-1 pl-2">Use Cases</a>
@@ -1193,7 +1193,7 @@ function Footer() {
             </div>
           </div>
           {col("Solutions", ["CME Audience Intelligence", "HCP Outreach", "Alumni Growth Engine", "Nurse Audience Intelligence"])}
-          {col("Services", [{ label: "CME Marketing Services", href: "services/cme-marketing.html" }, { label: "MOC Marketing Services", href: "services/maintenance-of-certification-marketing.html" }, { label: "CME Lead Generation Services", href: "services/lead-generation.html" }])}
+          {col("Services", [{ label: "CME Marketing Services", href: "cme-marketing.html" }, { label: "MOC Marketing Services", href: "maintenance-of-certification-marketing.html" }, { label: "CME Lead Generation Services", href: "lead-generation.html" }])}
           {col("Process", [{ label: "Use Cases", href: "use-cases.html" }, { label: "Personas & Intent", href: "personas.html" }, { label: "How CMEIntent Works", href: "how-it-works.html" }])}
           {col("Resources", [{ label: "Blogs", href: "blog.html" }, { label: "Case Studies", href: "case-studies.html" }, { label: "Whitepapers", href: "whitepapers.html" }, "FAQs"])}
           {col("Company", ["About", { label: "Contact", href: "contact.html" }])}

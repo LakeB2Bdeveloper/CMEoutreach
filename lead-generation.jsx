@@ -17,7 +17,7 @@ function LeadHero() {
           <div className="text-xs text-white/50 mb-4 flex items-center gap-2">
             <a href="index.html" className="hover:text-teal3 transition">Home</a>
             <span>/</span>
-            <a href="services/cme-marketing.html" className="hover:text-teal3 transition">Services</a>
+            <a href="cme-marketing.html" className="hover:text-teal3 transition">Services</a>
             <span>/</span>
             <span className="text-white/80">CME Lead Generation</span>
           </div>
@@ -232,7 +232,7 @@ function LeadCTA() {
               <a href="index.html#demo" className="px-6 py-3.5 bg-gradient-to-br from-gold2 to-gold text-ink font-bold rounded-lg shadow-lg hover:shadow-xl transition lift flex items-center gap-2">
                 Book a Quick Demo <IconLead name="arrow-right" size={18} />
               </a>
-              <a href="services/cme-marketing.html" className="px-6 py-3.5 border border-white/30 text-white font-semibold rounded-lg hover:border-teal3 hover:text-teal3 transition">
+              <a href="cme-marketing.html" className="px-6 py-3.5 border border-white/30 text-white font-semibold rounded-lg hover:border-teal3 hover:text-teal3 transition">
                 All CME Services
               </a>
             </div>
