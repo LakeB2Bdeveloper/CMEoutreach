@@ -7,43 +7,25 @@ const PAPERS = [
   topic: "Benchmark Report",
   icon: "bar-chart-3",
   title: "The 2026 CME Audience Benchmark Report",
-  excerpt: "Deliverability, enrollment, and intent benchmarks from 2,300+ healthcare organizations, with playbooks to match your therapeutic area.",
-  meta: "24 pages · PDF" },
+  excerpt: "Deliverability, enrollment, and intent benchmarks from 500+ healthcare organizations, with playbooks to match your therapeutic area.",
+  meta: "8 pages · PDF",
+  href: "benchmark-report.html" },
 
 {
   topic: "Intent Data",
   icon: "activity",
-  title: "Physician Intent Data: A Practitioner's Guide",
+  title: "HCP Intent Data: A Healthcare Marketer's Guide to Identifying In-Market Audiences",
   excerpt: "How behavioral signals from clinical platforms and CME portals are scored into actionable, in-market audiences you can target today.",
-  meta: "18 pages · PDF" },
+  meta: "5 pages · PDF",
+  href: "intent-data-report.html" },
 
 {
   topic: "Deliverability",
   icon: "mail-check",
   title: "Email Deliverability for Healthcare Marketers",
   excerpt: "The hygiene, authentication, and list-validation practices that move accredited invitations from the spam folder back to the inbox.",
-  meta: "16 pages · PDF" },
-
-{
-  topic: "Compliance",
-  icon: "shield-check",
-  title: "Building Compliant HCP Audiences",
-  excerpt: "A field guide to HIPAA, CAN-SPAM, and ACCME-aligned data sourcing, so your outreach stays defensible at every layer.",
-  meta: "12 pages · PDF" },
-
-{
-  topic: "MOC & Boards",
-  icon: "badge-check",
-  title: "The MOC & Board Certification Marketing Playbook",
-  excerpt: "Timing outreach to recertification windows to fill cohorts ahead of deadline, with messaging frameworks for each stage of the cycle.",
-  meta: "20 pages · PDF" },
-
-{
-  topic: "Attribution",
-  icon: "circle-dollar-sign",
-  title: "Multi-Touch Attribution for CME Programs",
-  excerpt: "Connect every enrollment and completion back to its originating asset, and prove ROI to the funders and stakeholders who matter.",
-  meta: "15 pages · PDF" }];
+  meta: "5 pages · PDF",
+  href: "deliverability-report.html" }];
 
 
 /* ------------------------------- Hero ---------------------------------- */
@@ -76,7 +58,7 @@ function WhitepapersHero() {
 function PaperCard({ p, dark }) {
   return (
     <a
-      href="#"
+      href={p.href || "#"}
       className={`group flex flex-col rounded-2xl border overflow-hidden transition lift shadow-sm hover:shadow-lg ${
       dark ? "border-transparent hover:border-teal3" : "bg-white border-slate-200 hover:border-teal2"}`}
       style={dark ? { backgroundColor: "#0d8a8a" } : undefined}>

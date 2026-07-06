@@ -1,0 +1,405 @@
+import React, { useState } from 'react';
+import { 
+  ShieldCheck, CheckCircle2, Mail, BarChart3, AlertTriangle, 
+  Eye, Zap, Users, Target, Award, Calendar, BookOpen, 
+  ArrowRight, Shield, Star, Menu, X, Landmark, GraduationCap, 
+  Building2, Pill, Monitor 
+} from 'lucide-react';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const painPoints = [
+    { icon: <AlertTriangle className="text-amber-500 w-8 h-8" />, title: "Declining CME Enrollment & Attendance", text: "Seats go unfilled in live and virtual CME, grand rounds, and RSS programs because outreach relies on outdated lists and untargeted blasts." },
+    { icon: <Target className="text-teal-600 w-8 h-8" />, title: "Weak Physician Targeting & Audience Quality", text: "Generic healthcare databases can't distinguish a hospitalist from a subspecialist, let alone identify clinicians actively seeking AMA PRA Category 1 Credit™." },
+    { icon: <Mail className="text-teal-600 w-8 h-8" />, title: "Healthcare Email Deliverability Failures", text: "Spam filters, outdated NPI records, and non-compliant data kill your sender reputation. Healthcare email best practices demand verified data." },
+    { icon: <BarChart3 className="text-teal-600 w-8 h-8" />, title: "Inability to Prove CME Marketing ROI", text: "Accreditation teams demand evidence-based reporting on learning outcomes. Without intent-driven analytics, you're guessing at success." },
+    { icon: <Shield className="text-amber-500 w-8 h-8" />, title: "Healthcare Marketing Compliance Risk", text: "HIPAA, CAN-SPAM, and ACCME independence standards create a minefield. One non-compliant campaign can jeopardize your status." },
+    { icon: <Eye className="text-teal-600 w-8 h-8" />, title: "No Visibility Into Clinician Intent Signals", text: "Without healthcare intent data, you can't identify which physicians are actively researching board certification renewal or MOC requirements." }
+  ];
+
+  const steps = [
+    { num: "1", title: "Capture Healthcare Intent Data", text: "Our AI engine monitors 5,000+ healthcare signals including ACCME content searches, board certification lookups, and MOC portal activity." },
+    { num: "2", title: "Build Your CME Audience Segment", text: "Layer NPI-verified physician data with specialty, geography, board status, practice setting, and interprofessional role filters." },
+    { num: "3", title: "Activate Multi-Channel Outreach", text: "Deploy HIPAA-compliant CME email marketing, physician webinar marketing, healthcare ABM strategies, and programmatic display." },
+    { num: "4", title: "Measure Learning Outcomes & ROI", text: "Close the loop with attribution reporting that ties CME attendee acquisition to actual learning outcomes and completions." }
+  ];
+
+  const features = [
+    { icon: <Zap className="text-teal-600 w-6 h-6" />, title: "Real-Time Healthcare Intent Data", text: "Identify physicians actively researching topics relevant to your CME program. Our intent engine maps behavioral signals seamlessly." },
+    { icon: <Users className="text-teal-600 w-6 h-6" />, title: "NPI-Verified Physician Database", text: "Access 2.1M+ verified clinicians segmented by specialty, NPI, practice type, board certification status, and MOC program participation." },
+    { icon: <Mail className="text-teal-600 w-6 h-6" />, title: "CME Email Marketing Engine", text: "Send HIPAA-compliant CME email marketing campaigns with 94%+ deliverability. Built-in suppression management and clinical optimization." },
+    { icon: <Target className="text-teal-600 w-6 h-6" />, title: "CME ABM & Account Targeting", text: "Run healthcare ABM strategies targeting entire health systems, academic medical centers, or specialty group practices." }
+  ];
+
+  const tabs = [
+    {
+      btnLabel: "Live & Virtual CME",
+      title: "Drive Enrollment for Live & Virtual CME Events",
+      desc: "Physician webinar marketing strategies that work require more than a generic email blast. CMEIntent identifies clinicians with active intent to attend CME aligned with their specialty.",
+      bullets: [
+        "Healthcare webinar attendance strategies powered by real-time intent signals from 2.1M+ verified physicians",
+        "Physician engagement strategies using personalized, specialty-specific messaging frameworks",
+        "Multi-touch outreach: CME email, programmatic display, and healthcare ABM for high-value accounts",
+        "Automated pre-event reminder sequences proven to reduce no-show rates by 40%",
+        "Post-event pathways converting attendees into enduring materials participants"
+      ],
+      metrics: [
+        { val: "3.2×", label: "Enrollment Lift vs. Control" },
+        { val: "94%", label: "Email Deliverability" },
+        { val: "58%", label: "Open Rate (CME Email)" },
+        { val: "−40%", label: "No-Show Rate Reduction" }
+      ],
+      note: "Based on aggregate data from 200+ CME programs, 2024–2025."
+    },
+    {
+      btnLabel: "Enduring Materials",
+      title: "Scale Completions for Enduring CME Materials",
+      desc: "Enduring materials represent your highest-ROI CME asset, available 24/7 and scalable to any audience size. CMEIntent keeps your enduring materials discoverable and converting year-round.",
+      bullets: [
+        "Intent-triggered outreach: automatically reach physicians researching your content's therapeutic area",
+        "Retargeting sequences re-engaging physicians who viewed but didn't complete your educational activity",
+        "Specialty-specific promotion tracks for AMA PRA Category 1 Credit™ enduring content",
+        "Learning outcomes tracking tied to completion, knowledge assessment, and competence data",
+        "SEO-informed physician targeting based on search behavior and content consumption patterns"
+      ],
+      metrics: [
+        { val: "4.1×", label: "More Completions YoY" },
+        { val: "72%", label: "Completion Rate" },
+        { val: "18mo", label: "Avg. Content Lifespan" },
+        { val: "$12", label: "Cost per Completion" }
+      ],
+      note: "Based on 150+ enduring materials programs, 2024–2025."
+    },
+    {
+      btnLabel: "Grand Rounds & RSS",
+      title: "Fill Your Grand Rounds & Regularly Scheduled Series",
+      desc: "Grand rounds and RSS programs are the backbone of institutional CME, yet reaching beyond your immediate clinical staff requires sophisticated outreach to external physicians.",
+      bullets: [
+        "Geographic and health system targeting to reach physicians in your service area",
+        "Recurring calendar invitations and reminder sequences tuned to RSS scheduling patterns",
+        "Interprofessional education audience segments spanning physicians, NPs, PAs, and pharmacists",
+        "Topic-aligned intent targeting: promote each grand rounds session to clinicians researching its subject",
+        "Hybrid attendance tools bridging in-person and virtual CME for maximum reach"
+      ],
+      metrics: [
+        { val: "2.8×", label: "External Attendance Growth" },
+        { val: "65%", label: "Session Return Rate" },
+        { val: "45%", label: "Interprofessional Mix" },
+        { val: "89%", label: "Learner Satisfaction" }
+      ],
+      note: "Aggregated across 80+ institutional grand rounds programs, 2024–2025."
+    },
+    {
+      btnLabel: "MOC Programs",
+      title: "Connect Clinicians to MOC & Board Certification Resources",
+      desc: "Maintenance of Certification programs represent the highest-urgency CME need a physician will have. CMEIntent identifies clinicians approaching their deadlines.",
+      bullets: [
+        "MOC deadline intelligence: target physicians within 12–18 months of board recertification requirements",
+        "Board-specific targeting across all major ABMS member boards and specialty societies",
+        "MOC Part 2 (lifelong learning) and Part 4 (practice improvement) activity promotion",
+        "Urgency-based messaging sequences that drive action as certification windows approach",
+        "HIPAA-compliant data linking CME completions to MOC point tracking systems"
+      ],
+      metrics: [
+        { val: "5.7×", label: "Conversion vs. Generic List" },
+        { val: "91%", label: "MOC Deadline Accuracy" },
+        { val: "38%", label: "Email Click-Through Rate" },
+        { val: "22%", label: "Same-Day Registration" }
+      ],
+      note: "Aggregated from MOC-focused CME programs across 12 specialty boards, 2024–2025."
+    },
+    {
+      btnLabel: "Medical Conferences",
+      title: "Medical Conference Promotion & CME Lead Generation",
+      desc: "Annual conferences require a different playbook: months of awareness building, targeted CME lead generation, and a last-mile conversion push.",
+      bullets: [
+        "6-month audience warm-up sequences building awareness before registration opens",
+        "Early bird targeting to physicians with highest intent-to-attend signals",
+        "Healthcare ABM strategies for group registrations from health systems and large practices",
+        "CME lead generation pipelines with CRM-ready, NPI-matched contact data",
+        "Post-conference enduring materials promotion to extend educational impact"
+      ],
+      metrics: [
+        { val: "+47%", label: "Registration vs. Prior Year" },
+        { val: "$38%", label: "Cost per Registrant" },
+        { val: "6mo", label: "Optimal Lead Time" },
+        { val: "3.1×", label: "Healthcare Marketing ROI" }
+      ],
+      note: "Aggregated from 60+ annual CME conference campaigns, 2024–2025."
+    }
+  ];
+
+  const intelCards = [
+    { icon: "🔬", title: "How Healthcare Intent Data Works", text: "We aggregate 5,000+ behavioral signals from clinical platforms and CME portals to score physician intent by topic and urgency." },
+    { icon: "🏥", title: "Healthcare Audience Targeting Strategies", text: "Layer NPI data, prescribing patterns, practice affiliation, board certification timelines, and real-time intent to build custom groups." },
+    { icon: "📱", title: "How to Reach Healthcare Professionals", text: "Our verified professional email network, point-of-care display, and EHR-adjacent touchpoints ensure your CME message hits where they work." },
+    { icon: "📈", title: "Physician Marketing Trends 2025–2026", text: "AI-powered segmentation, MOC urgency targeting, and mobile-first CME promotion are defining the next era of health education marketing." },
+    { icon: "🎯", title: "Healthcare ABM Strategies for CME", text: "Account-based marketing built for health systems: target every eligible physician and APP within a hospital system concurrently." },
+    { icon: "💰", title: "Healthcare Marketing ROI Attribution", text: "Multi-touch attribution modeling connects every CME enrollment and completion back to its originating campaign asset." }
+  ];
+
+  const complianceItems = [
+    { icon: "🔒", title: "HIPAA Compliant Marketing Data", text: "All physician data is sourced, processed, and transmitted in full compliance with HIPAA Privacy and Security Rules. We maintain Business Associate Agreements." },
+    { icon: "✅", title: "ACCME Independence Standards", text: "Our data and targeting tools support ACCME independence standards. Educational decisions remain entirely with the accredited provider." },
+    { icon: "📧", title: "CAN-SPAM & Email Compliance", text: "Best practices enforced at every layer: verified opt-in data, automatic suppression management, and proper sender authentication (SPF/DKIM)." },
+    { icon: "🛡️", title: "SOC 2 Type II Certified Infrastructure", text: "Our platform is SOC 2 Type II audited, ensuring your audience data and campaign analytics are protected by enterprise security standards." }
+  ];
+
+  const testimonials = [
+    { initials: "SM", name: "Sarah M.", role: "CME Director, Academic Medical Center", quote: "CMEIntent completely changed how we think about physician webinar marketing. Our virtual CME enrollment tripled in 90 days using their intent-based targeting." },
+    { initials: "RJ", name: "Robert J.", role: "VP Medical Education, National Medical Society", quote: "The HIPAA-compliant data quality and email deliverability are genuinely best-in-class. We moved from an unoptimized deliverability rate to a reliable 94% overnight." },
+    { initials: "KL", name: "Karen L.", role: "Accreditation Manager, Specialty Board CME Provider", quote: "As an accreditation team we were skeptical about any vendor claiming ACCME alignment. CMEIntent's approach genuinely supports independence standards." }
+  ];
+
+  return (
+    <div className="bg-white text-[#0B1F3A] font-sans antialiased selection:bg-teal-500 selection:text-white">
+      {/* NAV */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B1F3A]/95 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#0D8A8A] to-[#16B3B3] flex items-center justify-center text-white font-black text-lg">
+              M
+            </div>
+            <span className="font-display font-extrabold text-xl text-white">
+              CMEIntent<span className="text-[#1DCFCF]">IQ</span>
+            </span>
+          </a>
+          
+          <ul className="hidden md:flex items-center gap-8 text-white/80 font-medium text-sm">
+            <li><a href="#solutions" className="hover:text-[#1DCFCF] transition">Solutions</a></li>
+            <li><a href="#how-it-works" className="hover:text-[#1DCFCF] transition">How It Works</a></li>
+            <li><a href="#use-cases" className="hover:text-[#1DCFCF] transition">Use Cases</a></li>
+            <li><a href="#compliance" className="hover:text-[#1DCFCF] transition">Compliance</a></li>
+          </ul>
+
+          <div className="hidden md:flex items-center gap-3">
+            <a href="#" className="px-4 py-2 border border-white/30 rounded-md text-white text-sm font-semibold hover:border-[#1DCFCF] hover:text-[#1DCFCF] transition">Log In</a>
+            <a href="#demo" className="px-4 py-2 bg-gradient-to-br from-[#0D8A8A] to-[#16B3B3] shadow-md hover:shadow-lg text-white text-sm font-semibold rounded-md transition transform hover:-translateY-0.5">Request Demo</a>
+          </div>
+
+          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-[#0B1F3A] border-b border-white/10 px-6 py-4 flex flex-col gap-4">
+            <a href="#solutions" onClick={() => setMobileMenuOpen(false)} className="text-white/80 text-sm py-1">Solutions</a>
+            <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-white/80 text-sm py-1">How It Works</a>
+            <a href="#use-cases" onClick={() => setMobileMenuOpen(false)} className="text-white/80 text-sm py-1">Use Cases</a>
+            <a href="#compliance" onClick={() => setMobileMenuOpen(false)} className="text-white/80 text-sm py-1">Compliance</a>
+            <div className="h-px bg-white/10 my-1" />
+            <a href="#demo" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2.5 bg-gradient-to-br from-[#0D8A8A] to-[#16B3B3] text-white rounded-md font-semibold text-sm">Request Demo</a>
+          </div>
+        )}
+      </nav>
+
+      {/* HERO */}
+      <header className="relative min-h-screen bg-gradient-to-br from-[#0B1F3A] via-[#132D52] to-[#0A2940] pt-28 pb-16 px-6 overflow-hidden flex items-center">
+        <div className="absolute top-[-200px] right-[-200px] w-[700px] h-[700px] rounded-full bg-radial-gradient from-[#0D8A8A]/20 to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-[#0D8A8A]/20 border border-[#1DCFCF]/30 text-[#1DCFCF] text-xs font-bold tracking-wider uppercase px-4 py-1.5 rounded-full mb-6">
+              <span className="w-2 h-2 rounded-full bg-[#1DCFCF] animate-pulse" />
+              Healthcare Audience Intelligence Platform
+            </div>
+            <h1 className="font-display font-extrabold text-4xl sm:text-5xl text-white leading-[1.15] mb-6">
+              Turn <em className="not-italic text-[#1DCFCF]">Clinician Intent</em> Into <span className="text-[#FFD166]">CME Enrollment</span> That Drives Real Learning Outcomes
+            </h1>
+            <p className="text-white/70 text-lg max-w-xl mb-8 leading-relaxed">
+              CMEIntent delivers HIPAA-compliant healthcare audience intelligence and CME marketing solutions that help ACCME-accredited organizations fill their live and virtual CME, grand rounds, enduring materials, and RSS programs.
+            </p>
+            <div className="flex flex-wrap gap-4 mb-8">
+              <a href="#demo" className="px-6 py-3.5 bg-gradient-to-br from-[#F0A500] to-[#FFD166] text-[#0B1F3A] font-bold rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translateY-0.5 flex items-center gap-2">
+                Get a Free Demo <ArrowRight size={18} />
+              </a>
+              <a href="#how-it-works" className="px-6 py-3.5 border border-white/30 text-white font-semibold rounded-lg hover:border-[#1DCFCF] hover:text-[#1DCFCF] transition">
+                See How It Works
+              </a>
+            </div>
+            <div className="grid grid-cols-2 gap-y-3 gap-x-4 max-w-md text-white/60 text-xs font-medium">
+              <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-500" /> HIPAA Compliant Data</div>
+              <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-500" /> ACCME-Aligned Targeting</div>
+              <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-500" /> AMA PRA Category 1 Ready</div>
+              <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-500" /> No Setup Fees</div>
+            </div>
+          </div>
+
+          <div className="hidden lg:block bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur-xl">
+            <div className="flex items-center gap-2 pb-4 mb-5 border-b border-white/10">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+              <span className="text-white/60 text-xs font-semibold ml-1.5">CME Audience Intelligence Dashboard</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              <div className="bg-white/5 border border-white/5 rounded-lg p-4">
+                <div className="font-display font-extrabold text-2xl text-[#1DCFCF]">94%</div>
+                <div className="text-white/50 text-[11px] mt-1">Email Deliverability</div>
+              </div>
+              <div className="bg-white/5 border border-white/5 rounded-lg p-4">
+                <div className="font-display font-extrabold text-2xl text-[#1DCFCF]">3.2×</div>
+                <div className="text-white/50 text-[11px] mt-1">Avg. Enrollment Lift</div>
+              </div>
+              <div className="bg-white/5 border border-white/5 rounded-lg p-4">
+                <div className="font-display font-extrabold text-2xl text-[#1DCFCF]">2.1M+</div>
+                <div className="text-white/50 text-[11px] mt-1">Verified Clinicians</div>
+              </div>
+              <div className="bg-white/5 border border-white/5 rounded-lg p-4">
+                <div className="font-display font-extrabold text-2xl text-[#1DCFCF]">97%</div>
+                <div className="text-white/50 text-[11px] mt-1">NPI Match Accuracy</div>
+              </div>
+            </div>
+            
+            <div className="space-y-3.5">
+              <div>
+                <div className="flex justify-between text-xs text-white/60 mb-1"><span>Physician Targeting Match</span><span>92%</span></div>
+                <div className="h-1.5 bg-white/10 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-[#0D8A8A] to-[#1DCFCF]" style={{ width: '92%' }} /></div>
+              </div>
+              <div>
+                <div className="flex justify-between text-xs text-white/60 mb-1"><span>MOC Intent Signal Strength</span><span>87%</span></div>
+                <div className="h-1.5 bg-white/10 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-[#0D8A8A] to-[#1DCFCF]" style={{ width: '87%' }} /></div>
+              </div>
+              <div>
+                <div className="flex justify-between text-xs text-white/60 mb-1"><span>Board Cert. Renewal Readiness</span><span>78%</span></div>
+                <div className="h-1.5 bg-white/10 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-[#0D8A8A] to-[#1DCFCF]" style={{ width: '78%' }} /></div>
+              </div>
+            </div>
+
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 flex items-center gap-2.5 mt-5">
+              <ShieldCheck size={16} className="text-[#FFD166]" />
+              <span className="text-xs text-[#FFD166] font-medium">All data HIPAA compliant &amp; CAN-SPAM certified</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* LOGOS BAR */}
+      <div className="bg-slate-50 border-y border-slate-100 py-8 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Trusted by leading CME &amp; CE organizations</div>
+          <div className="flex flex-wrap justify-center items-center gap-8 text-sm font-bold text-slate-500">
+            <div className="flex items-center gap-2"><Building2 size={16} className="text-[#0D8A8A]" /> Academic Med Centers</div>
+            <div className="flex items-center gap-2"><GraduationCap size={16} className="text-[#0D8A8A]" /> ACCME Providers</div>
+            <div className="flex items-center gap-2"><Landmark size={16} className="text-[#0D8A8A]" /> Medical Societies</div>
+            <div className="flex items-center gap-2"><Pill size={16} className="text-[#0D8A8A]" /> Pharma Med Ed Teams</div>
+            <div className="flex items-center gap-2"><Monitor size={16} className="text-[#0D8A8A]" /> Virtual CME Platforms</div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAIN POINTS */}
+      <section id="solutions" className="py-20 px-6 max-w-7xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="text-xs font-bold text-[#0D8A8A] uppercase tracking-widest block mb-2">The CME Marketing Challenge</span>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#0B1F3A] mb-4">The Pain Points <em className="not-italic text-[#0D8A8A]">Every CME Marketer Knows</em></h2>
+          <p className="text-slate-500">From AMA PRA Category 1 Credit™ programs to MOC modules and interprofessional education activities, reaching the right clinicians has never been harder.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {painPoints.map((item, idx) => (
+            <div key={idx} className="border border-slate-100 bg-white hover:border-[#16B3B3] rounded-2xl p-7 transition shadow-sm hover:shadow-lg hover:-translateY-1 transform duration-300 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0D8A8A] to-[#16B3B3] opacity-0 group-hover:opacity-100 transition" />
+              <div className="mb-4">{item.icon}</div>
+              <h3 className="font-display font-bold text-base text-[#0B1F3A] mb-2">{item.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="bg-[#0B1F3A] py-20 px-6 text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold text-[#1DCFCF] uppercase tracking-widest block mb-2">How CMEIntent Works</span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl mb-4 font-normal">From <span className="text-[#1DCFCF]">Intent Signal</span> to Enrolled Clinician in 4 Steps</h2>
+            <p className="text-white/60">Our healthcare audience intelligence platform connects your CME programs with verified, intent-active clinicians through a HIPAA-compliant multi-channel core engine.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, idx) => (
+              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-6 relative">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0D8A8A] to-[#16B3B3] flex items-center justify-center font-display font-extrabold text-lg text-white mb-4">
+                  {step.num}
+                </div>
+                <h3 className="font-display font-bold text-sm text-white mb-2">{step.title}</h3>
+                <p className="text-white/60 text-xs leading-relaxed">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="bg-slate-50 py-20 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-xs font-bold text-[#0D8A8A] uppercase tracking-widest block mb-2">Platform Capabilities</span>
+            <h2 className="font-display font-extrabold text-3xl text-[#0B1F3A] mb-4">Healthcare Audience Intelligence <em className="not-italic text-[#0D8A8A]">Built for CME</em></h2>
+            <p className="text-slate-500 mb-8">Every feature is purpose-built for the CME ecosystem, covering enduring materials promotion, live conference enrollment, and RSS program outreach.</p>
+            <div className="space-y-4">
+              {features.map((feat, idx) => (
+                <div key={idx} className="flex gap-4 p-5 bg-white border border-slate-100 rounded-xl hover:border-[#16B3B3] transition hover:shadow-md">
+                  <div className="w-10 h-10 rounded-lg bg-[#E8F7F7] flex items-center justify-center shrink-0">
+                    {feat.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-sm text-[#0B1F3A] mb-1">{feat.title}</h4>
+                    <p className="text-slate-500 text-xs leading-relaxed">{feat.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-[#0B1F3A] border border-white/10 rounded-2xl p-6 overflow-hidden text-white">
+            <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-5">🎯 Active Segment: Cardiology CME Program</div>
+            
+            <div className="space-y-3">
+              {[
+                { name: "Dr. Sarah M. | Interventional Cardiologist", spec: "Board Cert. Due: Q3 2026 · MOC Active · NYC Metro", intent: "96", avatar: "👨‍⚕️" },
+                { name: "Dr. James K. | Cardiac Electrophysiologist", spec: "AMA PRA Cat. 1 Seeker · RSS Participant · Chicago", intent: "91", avatar: "👩‍⚕️" },
+                { name: "Dr. Priya R. | Cardiovascular NP", spec: "Interprofessional Ed · Enduring Materials · Boston", intent: "👨‍⚕️", avatar: "88" },
+                { name: "Dr. Marcus T. | Heart Failure Specialist", spec: "Grand Rounds Attendee · Board Cert. Active · Houston", intent: "85", avatar: "👩‍⚕️" }
+              ].map((row, idx) => (
+                <div key={idx} className="flex items-center gap-3.5 bg-white/5 border border-white/5 rounded-xl p-3">
+                  <div className="w-9 h-9 rounded-full bg-[#0D8A8A]/30 flex items-center justify-center text-base shrink-0">👩‍⚕️</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-semibold truncate">{row.name}</div>
+                    <div className="text-[10px] text-white/45 truncate mt-0.5">{row.spec}</div>
+                  </div>
+                  <div className="font-display font-extrabold text-xs text-[#1DCFCF] bg-[#0D8A8A]/20 px-2.5 py-1 rounded-full whitespace-nowrap">Intent: {row.intent}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="h-px bg-white/10 my-5" />
+            <div className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2.5">Active Audience Filters</div>
+            <div className="flex flex-wrap gap-1.5">
+              {["AMA PRA Category 1", "MOC Active", "Board Cert. 2026", "High Intent", "ACCME Accredited", "RSS Participant", "Virtual CME", "NPI Verified"].map((tag, idx) => (
+                <span key={idx} className={`text-[10px] font-semibold px-2.5 py-1 rounded-full border ${idx === 3 || idx === 6 ? 'bg-amber-500/10 border-amber-500/30 text-[#FFD166]' : 'bg-[#0D8A8A]/15 border-[#1DCFCF]/25 text-[#1DCFCF]'}`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* USE CASES */}
+      <section id="use-cases" className="py-20 px-6 max-w-7xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <span className="text-xs font-bold text-[#0D8A8A] uppercase tracking-widest block mb-2">Use Cases</span>
+          <h2 className="font-display font-extrabold text-3xl text-[#0B1F3A] mb-4">Built for Every CME Format &amp; <em className="not-italic text-[#0D8A8A]">Educational Activity</em></h2>
+          <p className="text-slate-500">Whether you're filling seats for a grand rounds series or scaling enrollment for enduring digital materials, CMEIntent has a proven playbook.</p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap gap-2 justify-center mb-8">
+          {tabs.map((tab, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveTab(idx)}
+              className={`px-4 py-2 text-xs font-semibold rounded-full border transition ${activeTab === idx ?

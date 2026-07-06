@@ -46,7 +46,7 @@ function Article() {
           shape="rounded"
           radius="24"
           fit="cover"
-          placeholder="Drop or click to upload the lead image"
+          placeholder="Drop the lead photo: a professional in Germany browsing a medical-professional database on screen"
           style={{ width: "100%", height: "auto", aspectRatio: "2 / 1", display: "block" }}>
         </image-slot>
         <figcaption className="text-center text-[12px] text-slate-400 mt-6 font-medium">A database is only as valuable as the verification, depth, and segmentation behind every record.</figcaption>
