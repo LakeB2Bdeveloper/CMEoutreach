@@ -241,12 +241,7 @@ function ContactHero() {
 }
 
 /* --------------------------- Booking constants ------------------------- */
-const TIME_SLOTS = [
-{ h: 9, m: 0 }, { h: 9, m: 30 }, { h: 10, m: 30, taken: true }, { h: 11, m: 0 },
-{ h: 13, m: 0 }, { h: 14, m: 30 }, { h: 15, m: 0 }, { h: 16, m: 30, taken: true }];
-
-const TOPICS = [
-"Audience targeting", "CME enrollment", "Compliance & HIPAA", "Multi-channel outreach", "Pricing & rollout", "Data accuracy"];
+const ZOOM_SCHEDULER_URL = "https://scheduler.zoom.us/gtm_success_team/healthcare-intent-audience-strategy-session";
 
 const WHAT_YOU_GET = [
 "A walkthrough of your eligible audience",
@@ -254,112 +249,8 @@ const WHAT_YOU_GET = [
 "Benchmarks for your specialty mix",
 "A pricing & rollout proposal"];
 
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-function startOfDay(d) {const x = new Date(d);x.setHours(0, 0, 0, 0);return x;}
-function fmtTime(h, m) {
-  const am = h < 12;
-  const hr = h % 12 === 0 ? 12 : h % 12;
-  return `${hr}:${String(m).padStart(2, "0")} ${am ? "AM" : "PM"}`;
-}
-function fmtLongDate(d) {
-  return d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
-}
-
-/* ------------------------------ Calendar ------------------------------- */
-function Calendar({ selected, onSelect }) {
-  const today = startOfDay(new Date());
-  const [view, setView] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
-  const maxMonth = new Date(today.getFullYear(), today.getMonth() + 2, 1); // book up to 2 months out
-
-  const grid = useMemo(() => {
-    const y = view.getFullYear(), mo = view.getMonth();
-    const first = new Date(y, mo, 1);
-    const lead = first.getDay();
-    const daysInMonth = new Date(y, mo + 1, 0).getDate();
-    const cells = [];
-    for (let i = 0; i < lead; i++) cells.push(null);
-    for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(y, mo, d));
-    return cells;
-  }, [view]);
-
-  const canPrev = view > new Date(today.getFullYear(), today.getMonth(), 1);
-  const canNext = view < maxMonth;
-  const step = (n) => setView(new Date(view.getFullYear(), view.getMonth() + n, 1));
-
-  const isSelectable = (d) => {
-    if (!d) return false;
-    const wd = d.getDay();
-    return d >= today && d <= maxMonth && wd !== 0 && wd !== 6;
-  };
-  const sameDay = (a, b) => a && b && a.getTime() === startOfDay(b).getTime();
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="font-display font-bold text-ink">{MONTHS[view.getMonth()]} {view.getFullYear()}</div>
-        <div className="flex gap-1.5">
-          <button onClick={() => canPrev && step(-1)} disabled={!canPrev}
-            className={`w-9 h-9 rounded-lg border flex items-center justify-center transition ${canPrev ? "border-slate-200 text-ink hover:border-teal2 hover:text-teal1" : "border-slate-100 text-slate-300 cursor-not-allowed"}`}>
-            <Icon name="chevron-left" size={16} />
-          </button>
-          <button onClick={() => canNext && step(1)} disabled={!canNext}
-            className={`w-9 h-9 rounded-lg border flex items-center justify-center transition ${canNext ? "border-slate-200 text-ink hover:border-teal2 hover:text-teal1" : "border-slate-100 text-slate-300 cursor-not-allowed"}`}>
-            <Icon name="chevron-right" size={16} />
-          </button>
-        </div>
-      </div>
-      <div className="grid grid-cols-7 gap-1 mb-1">
-        {DOW.map((d) => <div key={d} className="text-center text-[11px] font-bold text-slate-400 py-1.5">{d}</div>)}
-      </div>
-      <div className="grid grid-cols-7 gap-1">
-        {grid.map((d, i) => {
-          if (!d) return <div key={i} />;
-          const ok = isSelectable(d);
-          const sel = sameDay(selected, d);
-          return (
-            <button
-              key={i}
-              disabled={!ok}
-              onClick={() => onSelect(startOfDay(d))}
-              className={`aspect-square rounded-lg text-sm font-semibold transition flex items-center justify-center ${
-              sel ? "bg-gradient-to-br from-teal1 to-teal2 text-white shadow-md" :
-              ok ? "text-ink hover:bg-teal3/15 hover:text-teal1" :
-              "text-slate-300 cursor-not-allowed"}`}>
-              {d.getDate()}
-            </button>);
-        })}
-      </div>
-    </div>);
-}
-
-/* ------------------------------- Stepper ------------------------------- */
-function Stepper({ step }) {
-  const steps = ["Date & time", "Your details", "Confirmed"];
-  return (
-    <div className="flex items-center gap-2 mb-8">
-      {steps.map((label, i) => {
-        const n = i + 1;
-        const done = step > n;
-        const active = step === n;
-        return (
-          <React.Fragment key={i}>
-            <div className="flex items-center gap-2.5">
-              <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition ${
-              done ? "bg-teal1 text-white" : active ? "bg-ink text-white" : "bg-slate-100 text-slate-400"}`}>
-                {done ? <Icon name="check" size={14} /> : n}
-              </span>
-              <span className={`text-sm font-semibold hidden sm:block ${active || done ? "text-ink" : "text-slate-400"}`}>{label}</span>
-            </div>
-            {i < steps.length - 1 && <div className={`flex-1 h-px ${done ? "bg-teal1" : "bg-slate-200"}`} />}
-          </React.Fragment>);
-      })}
-    </div>);
-}
-
 /* ---------------------------- Summary Card ----------------------------- */
-function SummaryCard({ date, time, tz }) {
+function SummaryCard() {
   return (
     <div className="bg-gradient-to-br from-[#03101F] via-[#061A30] to-[#04162A] rounded-3xl p-7 lg:p-8 relative overflow-hidden h-full">
       <div className="absolute -top-24 -right-24 w-[320px] h-[320px] hero-glow rounded-full pointer-events-none" />
@@ -377,23 +268,15 @@ function SummaryCard({ date, time, tz }) {
         <div className="space-y-3 mb-6">
           <div className="flex items-center gap-3 text-white/85 text-sm"><span className="text-teal3"><Icon name="clock" size={16} /></span> 30 minutes</div>
           <div className="flex items-center gap-3 text-white/85 text-sm"><span className="text-teal3"><Icon name="video" size={16} /></span> Zoom video call</div>
-          <div className="flex items-center gap-3 text-white/85 text-sm"><span className="text-teal3"><Icon name="globe" size={16} /></span> {tz}</div>
+          <div className="flex items-center gap-3 text-white/85 text-sm"><span className="text-teal3"><Icon name="globe" size={16} /></span> Time zone detected automatically by Zoom</div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4 mb-6">
-          <div className="text-[10px] font-bold text-white/45 uppercase tracking-widest mb-2">Your selection</div>
-          {date ?
-          <div className="flex items-start gap-2.5 text-white">
-              <span className="text-teal3 mt-0.5"><Icon name="calendar-check" size={18} /></span>
-              <div>
-                <div className="font-display font-bold text-sm leading-tight">{fmtLongDate(date)}</div>
-                <div className="text-white/60 text-sm mt-0.5">{time ? time : "Select a time"}</div>
-              </div>
-            </div> :
-          <div className="flex items-center gap-2.5 text-white/45 text-sm">
-              <Icon name="calendar" size={18} /> No date selected yet
-            </div>
-          }
+          <div className="text-[10px] font-bold text-white/45 uppercase tracking-widest mb-2">Pick your time</div>
+          <div className="flex items-start gap-2.5 text-white/80 text-sm">
+            <span className="text-teal3 mt-0.5"><Icon name="calendar-check" size={18} /></span>
+            Choose a date &amp; time in the scheduler on the right — you'll get an instant confirmation with your Zoom link.
+          </div>
         </div>
 
         <div className="text-[10px] font-bold text-white/45 uppercase tracking-widest mb-3">What you'll get</div>
@@ -408,242 +291,53 @@ function SummaryCard({ date, time, tz }) {
     </div>);
 }
 
-/* --------------------------- Field components -------------------------- */
-function Field({ label, required, error, children }) {
-  return (
-    <label className="block">
-      <span className="block text-xs font-bold text-ink uppercase tracking-wide mb-1.5">{label}{required && <span className="text-teal1"> *</span>}</span>
-      {children}
-      {error && <span className="block text-[12px] text-rose-500 mt-1">{error}</span>}
-    </label>);
-}
-const inputCls = "w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-slate-400 focus:outline-none focus:border-teal2 focus:ring-2 focus:ring-teal3/25 transition";
-
 /* ----------------------------- Booking flow ---------------------------- */
 function Booking() {
-  const tz = "Eastern Time (ET)";
+  const [loaded, setLoaded] = useState(false);
 
-  const [step, setStep] = useState(1);
-  const [date, setDate] = useState(null);
-  const [slot, setSlot] = useState(null); // index into TIME_SLOTS
-  const [form, setForm] = useState({ name: "", email: "", phone: "", org: "", role: "", topics: [], notes: "" });
-  const [errors, setErrors] = useState({});
-
-  const timeLabel = slot != null ? fmtTime(TIME_SLOTS[slot].h, TIME_SLOTS[slot].m) : null;
-  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
-  const toggleTopic = (t) =>
-  setForm((f) => ({ ...f, topics: f.topics.includes(t) ? f.topics.filter((x) => x !== t) : [...f.topics, t] }));
-
-  const goDetails = () => {if (date && slot != null) setStep(2);};
-
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = "Please enter your name.";
-    if (!form.email.trim()) e.email = "Email is required.";else
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email.";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
-  const confirm = () => {if (validate()) {setStep(3);window.scrollTo({ top: 0, behavior: "smooth" });}};
-
-  const reset = () => {
-    setStep(1);setDate(null);setSlot(null);
-    setForm({ name: "", email: "", phone: "", org: "", role: "", topics: [], notes: "" });
-    setErrors({});
-  };
-
-  const downloadIcs = () => {
-    const s = TIME_SLOTS[slot];
-    const start = new Date(date);start.setHours(s.h, s.m, 0, 0);
-    const end = new Date(start.getTime() + 30 * 60000);
-    const pad = (n) => String(n).padStart(2, "0");
-    const f = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-    const ics = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//CMEIntent//Discovery Call//EN", "BEGIN:VEVENT",
-    `UID:${Date.now()}@cmeintent`, `DTSTART:${f(start)}`, `DTEND:${f(end)}`,
-    "SUMMARY:CMEIntent Discovery Call (Zoom)",
-    "DESCRIPTION:A Zoom link will be included in your confirmation email.",
-    "LOCATION:Zoom", "END:VEVENT", "END:VCALENDAR"].join("\r\n");
-    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-    const a = document.createElement("a");a.href = url;a.download = "cmeintent-discovery-call.ics";
-    document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-  };
-
-  const firstName = (() => {
-    const parts = form.name.trim().split(/\s+/).filter(Boolean);
-    const titles = ["dr", "dr.", "mr", "mr.", "ms", "ms.", "mrs", "mrs.", "prof", "prof.", "dr.med"];
-    const named = parts.find((p) => !titles.includes(p.toLowerCase()));
-    return named || parts[0] || "there";
-  })();
-
-  /* ---- Confirmation ---- */
-  if (step === 3) {
-    return (
-      <section className="py-16 px-6 max-w-3xl mx-auto">
-        <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-8 lg:p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/12 text-emerald-600 flex items-center justify-center mx-auto mb-6">
-            <Icon name="check-circle-2" size={34} strokeWidth={2} />
-          </div>
-          <h2 className="font-display font-extrabold text-3xl text-ink mb-3 tracking-tight">You're booked, {firstName}!</h2>
-          <p className="text-slate-500 mb-8 max-w-md mx-auto" style={{ color: "rgb(6, 30, 63)" }}>
-            A calendar invite with your Zoom link is on its way to <span className="font-semibold text-ink">{form.email}</span>.
-          </p>
-          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 text-left max-w-md mx-auto mb-8">
-            <div className="flex items-center gap-3 pb-4 mb-4 border-b border-slate-200">
-              <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal1 to-teal2 text-white flex items-center justify-center"><Icon name="video" size={18} /></span>
-              <div>
-                <div className="font-display font-bold text-ink text-sm">Discovery Call · Zoom</div>
-                <div className="text-slate-500 text-xs">30 minutes</div>
-              </div>
-            </div>
-            <div className="space-y-2.5 text-sm">
-              <div className="flex items-center gap-2.5 text-ink"><span className="text-teal1"><Icon name="calendar-check" size={16} /></span>{fmtLongDate(date)}</div>
-              <div className="flex items-center gap-2.5 text-ink"><span className="text-teal1"><Icon name="clock" size={16} /></span>{timeLabel} · {tz}</div>
-              {form.topics.length > 0 &&
-              <div className="flex items-start gap-2.5 text-ink"><span className="text-teal1 mt-0.5"><Icon name="list-checks" size={16} /></span>{form.topics.join(", ")}</div>
-              }
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <button onClick={downloadIcs} className="px-6 py-3 bg-gradient-to-br from-teal1 to-teal2 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition lift flex items-center gap-2">
-              <Icon name="calendar-plus" size={18} /> Add to calendar
-            </button>
-            <button onClick={reset} className="px-6 py-3 border border-slate-200 text-ink font-semibold rounded-lg hover:border-teal2 hover:text-teal1 transition">
-              Book another time
-            </button>
-          </div>
-        </div>
-      </section>);
-  }
-
-  /* ---- Steps 1 & 2 ---- */
   return (
     <section className="py-16 px-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
         <div className="lg:col-span-5">
-          <SummaryCard date={date} time={timeLabel} tz={tz} />
+          <SummaryCard />
         </div>
 
         <div className="lg:col-span-7">
-          {step === 2 &&
-          <div className="flex justify-start mb-4">
-              <button onClick={() => setStep(1)} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-ink hover:bg-ink2 text-white text-sm font-semibold shadow-md transition lift">
-                <Icon name="arrow-left" size={16} /> Back to date &amp; time
-              </button>
+          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-3 lg:p-4 overflow-hidden">
+            <div className="flex items-center justify-between px-4 pt-2 pb-3">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <Icon name="video" size={14} /> Zoom Scheduler
+              </span>
+              <a
+                href={ZOOM_SCHEDULER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal1 hover:text-teal2 transition">
+                Open in a new tab <Icon name="external-link" size={14} />
+              </a>
             </div>
-          }
-          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-7 lg:p-8">
-            <Stepper step={step} />
 
-            {step === 1 &&
-            <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
-                  <div>
-                    <h3 className="font-display font-bold text-ink mb-4">Pick a date</h3>
-                    <Calendar selected={date} onSelect={(d) => {setDate(d);setSlot(null);}} />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-ink mb-4">Available times</h3>
-                    {date ?
-                  <div className="grid grid-cols-2 gap-2.5">
-                        {TIME_SLOTS.map((s, i) => {
-                      const sel = slot === i;
-                      return (
-                        <button
-                          key={i}
-                          disabled={s.taken}
-                          onClick={() => setSlot(i)}
-                          className={`rounded-lg border py-2.5 text-sm font-semibold transition ${
-                          s.taken ? "border-slate-100 text-slate-300 line-through cursor-not-allowed" :
-                          sel ? "border-teal1 bg-teal3/15 text-teal1" :
-                          "border-slate-200 text-ink hover:border-teal2 hover:text-teal1"}`}>
-                              {fmtTime(s.h, s.m)}
-                            </button>);
-                    })}
-                      </div> :
-                  <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-400 flex flex-col items-center gap-2">
-                        <Icon name="calendar-clock" size={24} />
-                        Select a date to see open times
-                      </div>
-                  }
-                  </div>
+            <div className="relative rounded-2xl overflow-hidden border border-slate-100" style={{ minHeight: 720 }}>
+              {!loaded &&
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-400 bg-white">
+                  <Icon name="loader" size={22} className="animate-spin" />
+                  <span className="text-sm">Loading the scheduler…</span>
                 </div>
-                <div className="flex justify-end mt-8 pt-6 border-t border-slate-100">
-                  <button
-                  onClick={goDetails}
-                  disabled={!(date && slot != null)}
-                  className={`px-6 py-3 rounded-lg font-bold transition flex items-center gap-2 ${
-                  date && slot != null ?
-                  "bg-gradient-to-br from-teal1 to-teal2 text-white shadow-md hover:shadow-lg lift" :
-                  "bg-slate-100 text-slate-400 cursor-not-allowed"}`}>
-                    Continue <Icon name="arrow-right" size={18} />
-                  </button>
-                </div>
-              </div>
-            }
+              }
+              <iframe
+                title="Zoom Scheduler — Healthcare Intent Audience Strategy Session"
+                src={ZOOM_SCHEDULER_URL}
+                onLoad={() => setLoaded(true)}
+                className="w-full"
+                style={{ height: 720, border: "none" }} />
+            </div>
 
-            {step === 2 &&
-            <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <Field label="Full name" required error={errors.name}>
-                    <input className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Dr. Jane Smith" />
-                  </Field>
-                  <Field label="Work email" required error={errors.email}>
-                    <input type="email" className={inputCls} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="jane@institution.org" />
-                  </Field>
-                  <Field label="Phone">
-                    <input type="tel" className={inputCls} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="(555) 123-4567" />
-                  </Field>
-                  <Field label="Organization">
-                    <input className={inputCls} value={form.org} onChange={(e) => set("org", e.target.value)} placeholder="Accredited CME provider" />
-                  </Field>
-                </div>
-
-                <div className="mt-5">
-                  <Field label="Your role">
-                    <select className={inputCls} value={form.role} onChange={(e) => set("role", e.target.value)}>
-                      <option value="">Select one…</option>
-                      <option>CME / CE Director</option>
-                      <option>Marketing Lead</option>
-                      <option>Accreditation Manager</option>
-                      <option>Medical Education</option>
-                      <option>Other</option>
-                    </select>
-                  </Field>
-                </div>
-
-                <div className="mt-6">
-                  <span className="block text-xs font-bold text-ink uppercase tracking-wide mb-2.5">What would you like to cover?</span>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {TOPICS.map((t) => {
-                    const on = form.topics.includes(t);
-                    return (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => toggleTopic(t)}
-                        className={`text-sm font-semibold px-3.5 py-1.5 rounded-full border transition ${
-                        on ? "bg-ink text-white border-ink" : "bg-white text-slate-600 border-slate-200 hover:border-teal2 hover:text-teal1"}`}>
-                        {on && <span className="mr-1.5">✓</span>}{t}
-                      </button>);
-                  })}
-                  </div>
-                  <textarea
-                  className={inputCls + " resize-none"}
-                  rows="4"
-                  value={form.notes}
-                  onChange={(e) => set("notes", e.target.value)}
-                  placeholder="Tell us about your programs, specialties, or goals so we can tailor the call…" />
-                </div>
-
-                <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-slate-100">
-                  <span className="text-xs text-slate-400 flex items-center gap-1.5"><Icon name="lock" size={13} /> HIPAA-aware. We never sell your data.</span>
-                  <button onClick={confirm} className="px-6 py-3 rounded-lg font-bold bg-gradient-to-br from-gold2 to-gold text-ink shadow-md hover:shadow-lg transition lift flex items-center gap-2 shrink-0">
-                    Confirm booking <Icon name="check" size={18} />
-                  </button>
-                </div>
-              </div>
-            }
+            <p className="text-xs text-slate-400 px-4 pt-3 pb-1 flex items-center gap-1.5">
+              <Icon name="lock" size={13} /> Having trouble with the embedded view?{" "}
+              <a href={ZOOM_SCHEDULER_URL} target="_blank" rel="noopener noreferrer" className="text-teal1 hover:text-teal2 font-semibold underline">
+                Book directly on Zoom instead
+              </a>.
+            </p>
           </div>
         </div>
       </div>
