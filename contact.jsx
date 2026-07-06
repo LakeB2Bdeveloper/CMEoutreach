@@ -242,6 +242,7 @@ function ContactHero() {
 
 /* --------------------------- Booking constants ------------------------- */
 const ZOOM_SCHEDULER_URL = "https://scheduler.zoom.us/gtm_success_team/healthcare-intent-audience-strategy-session";
+const ZOOM_SCHEDULER_EMBED_URL = "https://scheduler.zoom.us/gtm_success_team/healthcare-intent-audience-strategy-session?origin=cme.intent.com&embed=true";
 
 const WHAT_YOU_GET = [
 "A walkthrough of your eligible audience",
@@ -317,7 +318,7 @@ function Booking() {
               </a>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden border border-slate-100" style={{ minHeight: 720 }}>
+            <div className="relative rounded-2xl overflow-hidden border border-slate-100" style={{ minHeight: 560 }}>
               {!loaded &&
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-400 bg-white">
                   <Icon name="loader" size={22} className="animate-spin" />
@@ -326,10 +327,11 @@ function Booking() {
               }
               <iframe
                 title="Zoom Scheduler — Healthcare Intent Audience Strategy Session"
-                src={ZOOM_SCHEDULER_URL}
+                src={ZOOM_SCHEDULER_EMBED_URL}
                 onLoad={() => setLoaded(true)}
+                frameBorder="0"
                 className="w-full"
-                style={{ height: 720, border: "none" }} />
+                style={{ height: 560, border: "none" }} />
             </div>
 
             <p className="text-xs text-slate-400 px-4 pt-3 pb-1 flex items-center gap-1.5">
