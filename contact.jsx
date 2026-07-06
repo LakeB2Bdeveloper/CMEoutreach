@@ -478,6 +478,21 @@ function Booking() {
     return named || parts[0] || "there";
   })();
 
+  // Zoom Scheduler supports ?firstname=&lastname=&email= to prefill its own
+  // booking form, so the person doesn't have to retype what they just gave us.
+  // https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0084432
+  const zoomConfirmUrl = (() => {
+    const parts = form.name.trim().split(/\s+/).filter(Boolean);
+    const first = parts[0] || "";
+    const last = parts.slice(1).join(" ");
+    const params = new URLSearchParams();
+    if (first) params.set("firstname", first);
+    if (last) params.set("lastname", last);
+    if (form.email.trim()) params.set("email", form.email.trim());
+    const qs = params.toString();
+    return qs ? `${ZOOM_SCHEDULER_URL}?${qs}` : ZOOM_SCHEDULER_URL;
+  })();
+
   /* ---- Confirmation ---- */
   if (step === 3) {
     return (
@@ -488,7 +503,7 @@ function Booking() {
           </div>
           <h2 className="font-display font-extrabold text-3xl text-ink mb-3 tracking-tight">Almost there, {firstName}!</h2>
           <p className="text-slate-500 mb-8 max-w-md mx-auto" style={{ color: "rgb(6, 30, 63)" }}>
-            One last step — confirm this exact slot on Zoom to lock in your call. Your details are saved; the Zoom link will be sent to <span className="font-semibold text-ink">{form.email}</span>.
+            One last step — confirm this exact slot on Zoom to lock in your call. We've carried your name and email over, so you won't need to retype them.
           </p>
           <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 text-left max-w-md mx-auto mb-8">
             <div className="flex items-center gap-3 pb-4 mb-4 border-b border-slate-200">
@@ -508,7 +523,7 @@ function Booking() {
           </div>
           <div className="flex flex-wrap gap-3 justify-center">
             <a
-              href={ZOOM_SCHEDULER_URL}
+              href={zoomConfirmUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-br from-teal1 to-teal2 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition lift flex items-center gap-2">
